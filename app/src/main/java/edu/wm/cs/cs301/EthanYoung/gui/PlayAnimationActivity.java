@@ -72,6 +72,7 @@ public class PlayAnimationActivity extends AppCompatActivity {
 
     public void showM(View view) {
         Log.v("LocalMapButton" , "Toggling local map");
+        Toast.makeText(PlayAnimationActivity.this, "LocalMapButton Pushed", Toast.LENGTH_SHORT).show();
         //cont.keyDown(Constants.UserInput.ToggleLocalMap, 0);
         if(seeButts){
             seeButts = false;
@@ -87,16 +88,19 @@ public class PlayAnimationActivity extends AppCompatActivity {
 
     public void showS(View view) {
         Log.v("SolutionButton" , "Toggling solution");
+        Toast.makeText(PlayAnimationActivity.this, "SolutionButton Pushed", Toast.LENGTH_SHORT).show();
         //cont.keyDown(Constants.UserInput.ToggleSolution, 0);
     }
 
     public void showF(View view) {
         Log.v("FullMapButton" , "Toggling full map");
+        Toast.makeText(PlayAnimationActivity.this, "FullMapButton Pushed", Toast.LENGTH_SHORT).show();
         //cont.keyDown(Constants.UserInput.ToggleFullMap, 0);
     }
 
     public void pause(View view) {
         Log.v("PauseButton" , "Toggling Pause");
+        Toast.makeText(PlayAnimationActivity.this, "Pause Pushed", Toast.LENGTH_SHORT).show();
         if(paused){
             //dri.pause = false;
             paused = false;
