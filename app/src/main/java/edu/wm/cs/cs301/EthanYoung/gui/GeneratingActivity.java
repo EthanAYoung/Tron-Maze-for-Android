@@ -75,6 +75,10 @@ public class GeneratingActivity extends AppCompatActivity {
         });*/
     }
 
+    /**
+     * Handles the generation of the maze in the background
+     * Also updates the progress bar
+     */
     class MazeGenerator extends AsyncTask<Context, Integer, String> {
 
         @Override
@@ -191,6 +195,9 @@ public class GeneratingActivity extends AppCompatActivity {
         return result;
     }*/
 
+    /**
+     * Transitions to PlayManuallyActivity or PlayAnimationActivity
+     */
     private void moveOn(Boolean manual){
         Intent intent;
         if(manual){
@@ -203,12 +210,19 @@ public class GeneratingActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * A helper method to pause the program
+     * useful to see what decisions the driver is making
+     */
     public void timeDelay(long t) {
         try {
             Thread.sleep(t);
         } catch (InterruptedException e) {}
     }
 
+    /**
+     * Returns to AMazeActivity
+     */
     public void returnToTitle(View view) {
         Log.v("BackButton" , "Returning to title");
         Toast.makeText(GeneratingActivity.this, "BackButton Pushed", Toast.LENGTH_SHORT).show();

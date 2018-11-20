@@ -83,6 +83,9 @@ public class PlayAnimationActivity extends AppCompatActivity {
         });*/
     }
 
+    /**
+     * Shows the local map
+     */
     public void showM(View view) {
         Log.v("LocalMapButton" , "Toggling local map");
         Toast.makeText(PlayAnimationActivity.this, "LocalMapButton Pushed", Toast.LENGTH_SHORT).show();
@@ -99,18 +102,27 @@ public class PlayAnimationActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Shows the maze solution
+     */
     public void showS(View view) {
         Log.v("SolutionButton" , "Toggling solution");
         Toast.makeText(PlayAnimationActivity.this, "SolutionButton Pushed", Toast.LENGTH_SHORT).show();
         //cont.keyDown(Constants.UserInput.ToggleSolution, 0);
     }
 
+    /**
+     * Shows the full maze
+     */
     public void showF(View view) {
         Log.v("FullMapButton" , "Toggling full map");
         Toast.makeText(PlayAnimationActivity.this, "FullMapButton Pushed", Toast.LENGTH_SHORT).show();
         //cont.keyDown(Constants.UserInput.ToggleFullMap, 0);
     }
 
+    /**
+     * Pauses the game
+     */
     public void pause(View view) {
         Log.v("PauseButton" , "Toggling Pause");
         Toast.makeText(PlayAnimationActivity.this, "Pause Pushed", Toast.LENGTH_SHORT).show();
@@ -126,6 +138,10 @@ public class PlayAnimationActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Wins the game
+     * Transitions to WinningActivity
+     */
     public void winNow(View view) {
         Log.v("WinButton" , "Winning now");
         Toast.makeText(PlayAnimationActivity.this, "Go2Winning Pushed", Toast.LENGTH_SHORT).show();
@@ -139,6 +155,10 @@ public class PlayAnimationActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * Loses the game
+     * Transitions to LosingActivity
+     */
     public void loseNow(View view) {
         Log.v("LoseButton" , "Losing now");
         Toast.makeText(PlayAnimationActivity.this, "Go2Loosing Pushed", Toast.LENGTH_SHORT).show();
@@ -153,6 +173,9 @@ public class PlayAnimationActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * Returns to AMazeActivity
+     */
     public void returnToTitle(View view) {
         Log.v("BackButton" , "Returning to title");
         Toast.makeText(PlayAnimationActivity.this, "BackButton Pushed", Toast.LENGTH_SHORT).show();
@@ -178,6 +201,10 @@ public class PlayAnimationActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * A helper method to pause the program
+     * useful to see what decisions the driver is making
+     */
     public void timeDelay(long t) {
         try {
             Thread.sleep(t);

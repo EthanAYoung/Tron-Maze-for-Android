@@ -88,24 +88,36 @@ public class PlayManuallyActivity extends AppCompatActivity {
         });*/
     }
 
+    /**
+     * tells the robot to go forward
+     */
     public void go(View view) {
         Log.v("ForwardButton" , "Going forward one space");
         Toast.makeText(PlayManuallyActivity.this, "Forward Pushed", Toast.LENGTH_SHORT).show();
         //dri.go();
     }
 
+    /**
+     * tells the robot to turn right
+     */
     public void turnR(View view) {
         Log.v("RightButton" , "Turning to the right");
         Toast.makeText(PlayManuallyActivity.this, "Right Pushed", Toast.LENGTH_SHORT).show();
         //dri.rotateR();
     }
 
+    /**
+     * tells the robot to turn left
+     */
     public void turnL(View view) {
         Log.v("LeftButton" , "Turning to the left");
         Toast.makeText(PlayManuallyActivity.this, "Left Pushed", Toast.LENGTH_SHORT).show();
         //dri.rotateL();
     }
 
+    /**
+     * Shows the local map
+     */
     public void showM(View view) {
         Log.v("LocalMapButton" , "Toggling local map");
         Toast.makeText(PlayManuallyActivity.this, "LocalMapButton Pushed", Toast.LENGTH_SHORT).show();
@@ -122,18 +134,27 @@ public class PlayManuallyActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Shows the maze solution
+     */
     public void showS(View view) {
         Log.v("SolutionButton" , "Toggling solution");
         Toast.makeText(PlayManuallyActivity.this, "SolutionButton Pushed", Toast.LENGTH_SHORT).show();
         //cont.keyDown(Constants.UserInput.ToggleSolution, 0);
     }
 
+    /**
+     * Shows the full maze
+     */
     public void showF(View view) {
         Log.v("FullMapButton" , "Toggling full map");
         Toast.makeText(PlayManuallyActivity.this, "FullMapButton Pushed", Toast.LENGTH_SHORT).show();
         //cont.keyDown(Constants.UserInput.ToggleFullMap, 0);
     }
 
+    /**
+     * Pauses the game
+     */
     public void pause(View view) {
         Log.v("PauseButton" , "Toggling Pause");
         Toast.makeText(PlayManuallyActivity.this, "Pause Pushed", Toast.LENGTH_SHORT).show();
@@ -149,6 +170,10 @@ public class PlayManuallyActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Wins the game
+     * Transitions to WinningActivity
+     */
     public void winNow(View view) {
         Log.v("WinButton" , "Winning now");
         Toast.makeText(PlayManuallyActivity.this, "Go2Winning Pushed", Toast.LENGTH_SHORT).show();
@@ -162,6 +187,10 @@ public class PlayManuallyActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * Loses the game
+     * Transitions to LosingActivity
+     */
     public void loseNow(View view) {
         Log.v("LoseButton" , "Losing now");
         Toast.makeText(PlayManuallyActivity.this, "Go2Loosing Pushed", Toast.LENGTH_SHORT).show();
@@ -176,6 +205,9 @@ public class PlayManuallyActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * Returns to AMazeActivity
+     */
     public void returnToTitle(View view) {
         Log.v("BackButton" , "Returning to title");
         Toast.makeText(PlayManuallyActivity.this, "BackButton Pushed", Toast.LENGTH_SHORT).show();

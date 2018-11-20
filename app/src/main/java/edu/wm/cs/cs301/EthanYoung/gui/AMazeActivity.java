@@ -63,6 +63,10 @@ public class AMazeActivity extends AppCompatActivity {
         });*/
     }
 
+    /**
+     * When the explore button is clicked
+     * Starts the process for random maze generation
+     */
     public void exploreClicked(View view) {
         Log.v("ExploreButton" , "Starting to generate a maze");
         Toast.makeText(AMazeActivity.this, "Explore Pushed", Toast.LENGTH_SHORT).show();
@@ -70,6 +74,10 @@ public class AMazeActivity extends AppCompatActivity {
         generateMaze();
     }
 
+    /**
+     * When the revisit button is clicked
+     * Starts the process for maze generation from a file
+     */
     public void revisitClicked(View view) {
         Log.v("RevisitButton" , "Loading a maze");
         Toast.makeText(AMazeActivity.this, "Revisit Pushed", Toast.LENGTH_SHORT).show();
@@ -77,6 +85,9 @@ public class AMazeActivity extends AppCompatActivity {
         generateMaze();
     }
 
+    /**
+     * Transitions to GeneratingActivity
+     */
     private void generateMaze() {
         Intent intent = new Intent(this , GeneratingActivity.class);
         intent.putExtra("robot" , robSelect.getSelectedItem().toString() );

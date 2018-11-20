@@ -67,6 +67,9 @@ public class WinningActivity extends AppCompatActivity {
         });*/
     }
 
+    /**
+     * Returns to AMazeActivity
+     */
     public void returnToTitle(View view) {
         Log.v("BackButton" , "Returning to title");
         Toast.makeText(WinningActivity.this, "BackButton Pushed", Toast.LENGTH_SHORT).show();
