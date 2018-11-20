@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import java.io.File;
 
@@ -32,6 +33,7 @@ public class GeneratingActivity extends AppCompatActivity {
     Boolean load;
     //Controller cont;
     //RobotDriver dri;
+    Boolean wentBack;
 
 
     @Override
@@ -47,6 +49,7 @@ public class GeneratingActivity extends AppCompatActivity {
         //VariableStorage.mostRecentSkill = level;
         //VariableStorage.stepsTaken = 0;
         //VariableStorage.energyConsumed = 0;
+        wentBack = false;
 
 
         new MazeGenerator().execute();
@@ -105,11 +108,13 @@ public class GeneratingActivity extends AppCompatActivity {
                 cont.start();
                 cont.keyDown(Constants.UserInput.Start, level);*/
             }
-            if(rob.equals("Manual")){
-                moveOn(true);
-            }
-            else{
-                moveOn(false);
+            if(wentBack == false) {
+                if (rob.equals("Manual")) {
+                    moveOn(true);
+                }
+                else {
+                    moveOn(false);
+                }
             }
             return null;
         }
@@ -198,6 +203,8 @@ public class GeneratingActivity extends AppCompatActivity {
 
     public void returnToTitle(View view) {
         Log.v("BackButton" , "Returning to title");
+        Toast.makeText(GeneratingActivity.this, "BackButton Pushed", Toast.LENGTH_SHORT).show();
+        wentBack = true;
         Intent intent = new Intent(this , AMazeActivity.class);
         startActivity(intent);
     }
