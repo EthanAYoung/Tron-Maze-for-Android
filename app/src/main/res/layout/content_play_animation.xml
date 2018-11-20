@@ -13,10 +13,10 @@
         android:layout_width="wrap_content"
         android:layout_height="35dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="36dp"
+        android:layout_marginEnd="159dp"
         android:onClick="returnToTitle"
         android:text="Back"
-        app:layout_constraintEnd_toStartOf="@+id/Go2Winning"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
@@ -67,22 +67,27 @@
 
     <Button
         android:id="@+id/Go2Winning"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="12dp"
+        android:layout_width="326dp"
+        android:layout_height="144dp"
+        android:layout_marginStart="124dp"
+        android:layout_marginTop="47dp"
+        android:layout_marginEnd="124dp"
         android:onClick="winNow"
         android:text="Go2Winning"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/backButt3" />
 
     <Button
         android:id="@+id/Go2Loosing"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="285dp"
+        android:layout_width="328dp"
+        android:layout_height="174dp"
+        android:layout_marginStart="124dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="122dp"
         android:onClick="loseNow"
         android:text="Go2Loosing"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Go2Winning" />
 
@@ -92,11 +97,12 @@
         android:layout_height="82dp"
         android:layout_marginStart="164dp"
         android:layout_marginEnd="152dp"
-        android:layout_marginBottom="261dp"
+        android:layout_marginBottom="56dp"
         android:text="PAUSED"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ProgressBar
