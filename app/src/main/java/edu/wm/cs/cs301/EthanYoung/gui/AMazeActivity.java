@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.SeekBar;
 import android.util.Log;
 import android.content.Intent;
+import android.widget.Toast;
 
 
 public class AMazeActivity extends AppCompatActivity {
@@ -55,12 +56,14 @@ public class AMazeActivity extends AppCompatActivity {
 
     public void exploreClicked(View view) {
         Log.v("ExploreButton" , "Starting to generate a maze");
+        Toast.makeText(AMazeActivity.this, "Explore Pushed", Toast.LENGTH_SHORT).show();
         load = false;
         generateMaze();
     }
 
     public void revisitClicked(View view) {
         Log.v("RevisitButton" , "Loading a maze");
+        Toast.makeText(AMazeActivity.this, "Revisit Pushed", Toast.LENGTH_SHORT).show();
         load = true;
         generateMaze();
     }

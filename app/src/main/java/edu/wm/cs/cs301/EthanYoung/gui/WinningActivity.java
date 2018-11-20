@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class WinningActivity extends AppCompatActivity {
 
@@ -59,6 +60,7 @@ public class WinningActivity extends AppCompatActivity {
 
     public void returnToTitle(View view) {
         Log.v("BackButton" , "Returning to title");
+        Toast.makeText(WinningActivity.this, "BackButton Pushed", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this , AMazeActivity.class);
         startActivity(intent);
     }

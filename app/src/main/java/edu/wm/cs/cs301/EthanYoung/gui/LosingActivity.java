@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class LosingActivity extends AppCompatActivity {
 
@@ -63,6 +64,7 @@ public class LosingActivity extends AppCompatActivity {
 
     public void returnToTitle(View view) {
         Log.v("BackButton" , "Returning to title");
+        Toast.makeText(LosingActivity.this, "BackButton Pushed", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this , AMazeActivity.class);
         startActivity(intent);
     }
