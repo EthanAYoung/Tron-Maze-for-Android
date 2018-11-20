@@ -1,7 +1,7 @@
 /**
  * @author Ethan Young
  * The main activity for the Maze app
- * It allows you to select a dificulty level
+ * It allows you to select a difficulty level
  * a maze building algorithm and a robot to play the maze with
  * The explore button creates a new random maze using the selected parameters
  * The revist button loads an old maze from a saved file
