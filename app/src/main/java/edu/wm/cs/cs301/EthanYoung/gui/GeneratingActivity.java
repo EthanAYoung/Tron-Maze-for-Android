@@ -1,3 +1,11 @@
+/**
+ * @author Ethan Young
+ * This activity is where the maze is generated from scratch
+ * or loaded from a saved file
+ * the progress bar shows how far along the generation is
+ * the back button returns you to AMazeActivity
+ */
+
 package edu.wm.cs.cs301.EthanYoung.gui;
 
 import android.content.Context;

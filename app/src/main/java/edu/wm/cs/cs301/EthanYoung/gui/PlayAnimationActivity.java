@@ -1,3 +1,16 @@
+/**
+ * @author Ethan Young
+ * This activity is shown when a driver is automatically playing the game
+ * The progress bar shows how much energy is left
+ * The Show Map button shows the local map
+ * The Solution button shows the maze solution
+ * The Full Map button shows the whole map
+ * The pause button pauses the game
+ * The Go2Winning button wins the game
+ * The Go2Loosing button loses the game
+ * the back button returns you to AMazeActivity
+ */
+
 package edu.wm.cs.cs301.EthanYoung.gui;
 
 import android.content.Context;

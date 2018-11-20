@@ -1,3 +1,12 @@
+/**
+ * @author Ethan Young
+ * This activity is shown when you win the maze game
+ * Shows the energy consumption (if the driver wasn't manual)
+ * Shows the length of the path you took
+ * Shows the length of the shortest path
+ * the back button returns you to AMazeActivity
+ */
+
 package edu.wm.cs.cs301.EthanYoung.gui;
 
 import android.content.Intent;

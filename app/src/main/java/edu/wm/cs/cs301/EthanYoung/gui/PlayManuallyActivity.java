@@ -1,3 +1,18 @@
+/**
+ * @author Ethan Young
+ * This activity is shown when a driver is automatically playing the game
+ * The Show Map button shows the local map
+ * The Solution button shows the maze solution
+ * The Full Map button shows the whole map
+ * The pause button pauses the game
+ * The Go2Winning button wins the game
+ * The Go2Loosing button loses the game
+ * the back button returns you to AMazeActivity
+ * The Up button moves the robot forward
+ * The Left button turns the robot left
+ * The Right button turns the robot right
+ */
+
 package edu.wm.cs.cs301.EthanYoung.gui;
 
 import android.content.Intent;

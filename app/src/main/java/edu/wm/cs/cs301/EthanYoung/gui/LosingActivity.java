@@ -1,3 +1,13 @@
+/**
+ * @author Ethan Young
+ * This activity is shown when you lose the maze game
+ * Shows the energy consumption
+ * Shows the length of the path you took
+ * Shows the length of the shortest path
+ * Shows the reason you lost
+ * the back button returns you to AMazeActivity
+ */
+
 package edu.wm.cs.cs301.EthanYoung.gui;
 
 import android.content.Intent;
