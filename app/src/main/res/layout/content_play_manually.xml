@@ -91,20 +91,25 @@
         android:id="@+id/Go2Winning"
         android:layout_width="348dp"
         android:layout_height="277dp"
+        android:layout_marginStart="37dp"
+        android:layout_marginTop="77dp"
+        android:layout_marginEnd="26dp"
         android:onClick="winNow"
         android:text="Go2Winning"
-        tools:layout_editor_absoluteX="37dp"
-        tools:layout_editor_absoluteY="128dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/backButt" />
 
     <Button
         android:id="@+id/backButt"
         android:layout_width="wrap_content"
         android:layout_height="35dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="163dp"
         android:onClick="returnToTitle"
         android:text="Back"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="160dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/pauseMsg"
