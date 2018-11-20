@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".PlayAnimationActivity"
+    tools:showIn="@layout/activity_play_animation">
+
+    <Button
+        android:id="@+id/backButt3"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="36dp"
+        android:onClick="returnToTitle"
+        android:text="Back"
+        app:layout_constraintEnd_toStartOf="@+id/Go2Winning"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/mapButt"
+        android:layout_width="131dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="465dp"
+        android:onClick="showM"
+        android:text="Show Map"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pauseButt" />
+
+    <Button
+        android:id="@+id/solButt"
+        android:layout_width="63dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="9dp"
+        android:onClick="showS"
+        android:text="Solution"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/fullButt"
+        android:layout_width="66dp"
+        android:layout_height="39dp"
+        android:layout_marginEnd="264dp"
+        android:layout_marginBottom="9dp"
+        android:onClick="showF"
+        android:text="Full Map"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/pauseButt"
+        android:layout_width="71dp"
+        android:layout_height="33dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:onClick="pause"
+        android:text="Pause"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/Go2Winning"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="12dp"
+        android:onClick="winNow"
+        android:text="Go2Winning"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/Go2Loosing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="285dp"
+        android:onClick="loseNow"
+        android:text="Go2Loosing"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Go2Winning" />
+
+    <TextView
+        android:id="@+id/pauseMsg"
+        android:layout_width="95dp"
+        android:layout_height="82dp"
+        android:layout_marginStart="164dp"
+        android:layout_marginEnd="152dp"
+        android:layout_marginBottom="261dp"
+        android:text="PAUSED"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="120dp"
+        android:layout_height="63dp"
+        android:layout_marginEnd="17dp"
+        android:layout_marginBottom="49dp"
+        android:indeterminate="false"
+        android:progress="100"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">AMazeByEthanYoung</string>
+    <string name="title_activity_amaze">AMazeActivity</string>
+    <string-array name="algorithms">
+        <item>DFS</item>
+        <item>Prim</item>
+        <item>Eller</item>
+    </string-array>
+    <string-array name="robots">
+        <item>Manual</item>
+        <item>Wizard</item>
+        <item>WallFollower</item>
+        <item>Explorer</item>
+    </string-array>
+    <string name="title_activity_generating">GeneratingActivity</string>
+    <string name="title_activity_play_manually">PlayManuallyActivity</string>
+    <string name="title_activity_play_animation">PlayAnimationActivity</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_winning">WinningActivity</string>
+    <string name="title_activity_losing">LosingActivity</string>
+</resources>
