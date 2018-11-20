@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 //import gui.Controller;
 //import gui.RobotDriver;
@@ -110,6 +111,7 @@ public class PlayAnimationActivity extends AppCompatActivity {
 
     public void winNow(View view) {
         Log.v("WinButton" , "Winning now");
+        Toast.makeText(PlayAnimationActivity.this, "Go2Winning Pushed", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this , WinningActivity.class);
         intent.putExtra("ogBatt" , 3000);
         intent.putExtra("currBatt", 50);
@@ -122,6 +124,7 @@ public class PlayAnimationActivity extends AppCompatActivity {
 
     public void loseNow(View view) {
         Log.v("LoseButton" , "Losing now");
+        Toast.makeText(PlayAnimationActivity.this, "Go2Loosing Pushed", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this , LosingActivity.class);
         intent.putExtra("ogBatt" , 3000);
         intent.putExtra("currBatt", 50);
@@ -135,6 +138,7 @@ public class PlayAnimationActivity extends AppCompatActivity {
 
     public void returnToTitle(View view) {
         Log.v("BackButton" , "Returning to title");
+        Toast.makeText(PlayAnimationActivity.this, "BackButton Pushed", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this , AMazeActivity.class);
         startActivity(intent);
     }
