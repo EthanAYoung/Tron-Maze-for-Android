@@ -105,8 +105,8 @@ public class MazePanel extends View {
         return value;
     }
 
-    public void drawSomeShapes(){
-        paint.setColor(Color.RED);
+    protected void drawSomeShapes(){
+        paint.setColor(Color.YELLOW);
         drawRect(0, 100, 100, 200, Color.YELLOW);
         paint.setColor(Color.GREEN);
         can.drawCircle(160, 100, 50, paint);
@@ -126,7 +126,7 @@ public class MazePanel extends View {
      * @param w is the width of the rectangle
      * @param h is the height of the rectangle
      */
-    public void drawRect(int x, int y, int w, int h){
+    private void drawRect(int x, int y, int w, int h){
         paint.setStyle(Paint.Style.FILL);
         can.drawRect(new Rect(x, y, w+x, h+y), paint);
     }
@@ -139,7 +139,7 @@ public class MazePanel extends View {
      * @param h is the height of the rectangle
      * @param color is the color of the rectangle
      */
-    public void drawRect(int x, int y, int w, int h, int color){
+    private void drawRect(int x, int y, int w, int h, int color){
         paint.setStyle(Paint.Style.FILL);
         int temp = col;
         col = color;
@@ -153,7 +153,7 @@ public class MazePanel extends View {
     }*/
     public void update() {
         //paint(g);
-        //invalidate();
+        invalidate();
     }
 
     /**
