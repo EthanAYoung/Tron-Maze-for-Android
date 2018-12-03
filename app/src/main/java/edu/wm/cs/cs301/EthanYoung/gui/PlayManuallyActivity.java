@@ -54,6 +54,7 @@ public class PlayManuallyActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.v("manual play check", "manual play check");
         setContentView(R.layout.activity_play_manually);
 
         pB = (Button) findViewById(R.id.pauseButt);

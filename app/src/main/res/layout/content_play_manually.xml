@@ -88,19 +88,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/Go2Winning"
-        android:layout_width="348dp"
-        android:layout_height="277dp"
-        android:layout_marginStart="37dp"
-        android:layout_marginTop="77dp"
-        android:layout_marginEnd="26dp"
-        android:onClick="winNow"
-        android:text="Go2Winning"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/backButt" />
-
-    <Button
         android:id="@+id/backButt"
         android:layout_width="wrap_content"
         android:layout_height="35dp"
@@ -124,5 +111,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.183"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <edu.wm.cs.cs301.EthanYoung.gui.MazePanel
+        android:id="@+id/mazePanel"
+        android:layout_width="186dp"
+        android:layout_height="208dp"
+        android:layout_marginStart="91dp"
+        android:layout_marginTop="86dp"
+        android:layout_marginEnd="91dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/backButt" />
 
 </android.support.constraint.ConstraintLayout>

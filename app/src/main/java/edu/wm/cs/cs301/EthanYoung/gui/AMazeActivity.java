@@ -9,6 +9,7 @@
 
 package edu.wm.cs.cs301.EthanYoung.gui;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -31,12 +32,16 @@ public class AMazeActivity extends AppCompatActivity {
     Spinner algSelect;
     SeekBar levSelect;
     Boolean load;
-
+    MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_amaze);
+
+        mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.sans);
+
+        mediaPlayer.start();
 
         algSelect = (Spinner) findViewById(R.id.spinnerForAlgos);
         /*ArrayAdapter<CharSequence> adapterA = ArrayAdapter.createFromResource(this, R.array.algorithms, android.R.layout.simple_spinner_item);
