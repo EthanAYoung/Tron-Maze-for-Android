@@ -24,7 +24,7 @@ import edu.wm.cs.cs301.EthanYoung.gui.Constants.UserInput;
  * Refactored by Peter Kemper
  */
 public class StateWinning extends DefaultState {
-    MazeView view;
+    //MazeView view;
     MazePanel panel;
     Controller control;
     Boolean lost;
@@ -51,8 +51,8 @@ public class StateWinning extends DefaultState {
         // keep the reference to the panel for drawing
         this.panel = panel;
         // init mazeview, controller not needed for final screen
-        view = new MazeView(null);
-        view.contr = controller;
+        //view = new MazeView(null);
+        //view.contr = controller;
 
         if (panel == null) {
     		System.out.println("StateWinning.start: warning: no panel, dry-run game without graphics!");
@@ -60,7 +60,7 @@ public class StateWinning extends DefaultState {
     	}
         // otherwise show finish screen with winning message
         // draw content on panel
-        view.redrawFinish(panel);
+        //view.redrawFinish(panel);
         // update screen with panel content
         panel.update();
 

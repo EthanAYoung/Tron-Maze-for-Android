@@ -3,7 +3,7 @@
  */
 package edu.wm.cs.cs301.EthanYoung.generation;
 
-import gui.MazeFileWriter;
+import edu.wm.cs.cs301.EthanYoung.gui.MazeFileWriter;
 
 import java.util.ArrayList;
 

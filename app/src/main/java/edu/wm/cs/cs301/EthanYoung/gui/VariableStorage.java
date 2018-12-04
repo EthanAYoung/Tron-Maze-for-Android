@@ -4,8 +4,8 @@ import android.graphics.Bitmap;
 
 public class VariableStorage {
 
-    gui.Controller cont;
-    Bitmap bMap;
+    static Controller cont;
+    static Bitmap bMap;
     private static MazePanel panel;
 
     public static MazePanel getMazePanel() {
@@ -16,7 +16,7 @@ public class VariableStorage {
         return bMap;
     }
 
-    public void setCont(gui.Controller c){
+    public void setCont(Controller c){
         cont = c;
     }
 

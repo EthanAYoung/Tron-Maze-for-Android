@@ -8,7 +8,7 @@ import org.w3c.dom.Element;
 import edu.wm.cs.cs301.EthanYoung.gui.GeneratingActivity;
 import edu.wm.cs.cs301.EthanYoung.gui.MazePanel;
 import edu.wm.cs.cs301.EthanYoung.gui.VariableStorage;
-import gui.MazeFileWriter;
+import edu.wm.cs.cs301.EthanYoung.gui.MazeFileWriter;
 
 /**
  * A segment is a continuous sequence of walls in the maze.
@@ -71,7 +71,8 @@ public class Seg {
      * by the user on its path through the maze.
      */
     private boolean seen;
-    public MazePanel panel;
+    //public MazePanel panel;
+    public int col;
 
     /**
      * Constructor assigns parameter values to instance variables.
@@ -92,7 +93,6 @@ public class Seg {
      */
     public Seg(final int psx, final int psy, final int pdx, final int pdy,
             final int distance, final int cc) {
-    	panel = VariableStorage.getMazePanel();
         //System.out.println(psx + ", " + psy + ", " +pdx + ", " +pdy + ", " + distance);
         // set position
         x = psx;
@@ -116,7 +116,7 @@ public class Seg {
         partition = false;
         seen = false;
         // determine color
-        panel.initColor(distance, cc, this);
+        initColor(distance, cc, this);
         // all fields initialized
     }
 
@@ -263,7 +263,7 @@ public class Seg {
         MazeFileWriter.appendChild(doc, mazeXML, "ySeg_" + number + "_" + i,
                 getStartPositionY());
         MazeFileWriter.appendChild(doc, mazeXML, "colSeg_" + number + "_" + i,
-                panel.getColor());
+                col);
     }
 
     /**
@@ -293,7 +293,7 @@ public class Seg {
             return false;
         }
         if ((dist != o.dist) || (partition != o.partition) || (seen != o.seen)
-                || !panel.colorsEqual(o)) {
+                || col != o.col) {
             return false;
         }
         // all fields are equal, so both objects are equal
@@ -475,4 +475,53 @@ public class Seg {
     private int calculateDot(int df1x, int df1y) {
         return df1x * dy + df1y * (-dx);
     }
+
+
+    /**
+     * Determine and set the color for this segment.
+     *
+     * @param distance
+     *            to exit
+     * @param cc
+     *            obscure
+     */
+    public void initColor(final int distance, final int cc, Seg segment) {
+        final int d = distance / 4;
+        // mod used to limit the number of colors to 6
+        final int rgbValue = segment.calculateRGBValue(d);
+        switch (((d >> 3) ^ cc) % 6) {
+            case 0:
+                col = convertColor(rgbValue, RGB_DEF, RGB_DEF);
+                break;
+            case 1:
+                col = convertColor(RGB_DEF, rgbValue, RGB_DEF);
+                break;
+            case 2:
+                col = convertColor(RGB_DEF, RGB_DEF, rgbValue);
+                break;
+            case 3:
+                col = convertColor(rgbValue, rgbValue, RGB_DEF);
+                break;
+            case 4:
+                col = convertColor(RGB_DEF, rgbValue, rgbValue);
+                break;
+            case 5:
+                col = convertColor(rgbValue, RGB_DEF, rgbValue);
+                break;
+            default:
+                col = convertColor(RGB_DEF, RGB_DEF, RGB_DEF);
+                break;
+        }
+    }
+
+    /**
+     * Transforms a RGB value into a single int values
+     */
+    private int convertColor(int r, int g, int b){
+        r = (r << 16) & 0x00FF0000;
+        g = (g << 8) & 0x0000FF00;
+        b = b & 0x000000FF;
+        return 0xFF000000 | r | g | b;
+    }
+
 }

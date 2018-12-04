@@ -1,6 +1,6 @@
 package edu.wm.cs.cs301.EthanYoung.generation;
 
-import gui.Constants;
+import edu.wm.cs.cs301.EthanYoung.gui.Constants;
 
 
 /**

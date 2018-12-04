@@ -131,7 +131,7 @@ public class FirstPersonDrawer {
 	}
 	/**
 	 * Draws the first person view on the screen during the game
-	 * @param panel for drawing on the buffer image
+	 //* @param panel for drawing on the buffer image
 	 * @param x coordinate of current position, only used to set viewX
 	 * @param y coordinate of current position, only used to set viewY
 	 * @param ang gives the current viewing angle
@@ -139,9 +139,9 @@ public class FirstPersonDrawer {
 	 */
 	public void draw(MazePanel panel2, int x, int y, int walkStep, int ang) {
 		// obtain a Graphics2D object we can draw on
-		panel.tempG = panel.getBufferGraphics() ;
+		//panel.tempG = panel.getBufferGraphics() ;
         // viewers draw on the buffer graphics
-        if (null == panel.tempG) {
+        if (null == panel) {
             System.out.println("FirstPersonDrawer.draw: can't get graphics object to draw on, skipping redraw operation") ;
             return;
         }
@@ -399,7 +399,7 @@ public class FirstPersonDrawer {
 		
 		// moved code for drawing bits and pieces into yet another method to 
 		// gain more clarity on what information is actually needed
-		panel.gc.setColor(seg.panel.getColor());
+		//panel.gc.setColor(seg.panel.getColor());
 		boolean drawn = drawSegmentPolygons(x1, x2, y11, y12, y21, y22);
 		
 		if (drawn && !seg.isSeen()) {
@@ -479,7 +479,7 @@ public class FirstPersonDrawer {
 			// debug
 			//System.out.println("polygon-x: " + xps[0] + ", " + xps[1] + ", " + xps[2] + ", " + xps[3]) ;
 			//System.out.println("polygon-y: " + yps[0] + ", " + yps[1] + ", " + yps[2] + ", " + yps[3]) ;
-			panel.gc.fillPolygon(xps, yps, 4);
+			//panel.gc.fillPolygon(xps, yps, 4);
 			// for debugging purposes, code will draw a red line around polygon
 			// this makes individual segments visible
 			/*

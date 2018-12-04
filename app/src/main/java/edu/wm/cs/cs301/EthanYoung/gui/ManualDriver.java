@@ -8,6 +8,8 @@
 package edu.wm.cs.cs301.EthanYoung.gui;
 
 import edu.wm.cs.cs301.EthanYoung.generation.Distance;
+import edu.wm.cs.cs301.EthanYoung.gui.Robot.Turn;
+import edu.wm.cs.cs301.EthanYoung.gui.Constants.UserInput;
 
 public class ManualDriver implements RobotDriver {
 	

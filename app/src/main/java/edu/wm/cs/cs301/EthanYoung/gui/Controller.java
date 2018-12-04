@@ -97,7 +97,7 @@ public class Controller {
         states[3] = new StateWinning();
         currentState = states[0];
         stateNum = 0;
-        panel = new MazePanel(); 
+        //panel = new MazePanel();
         fileName = null;
         builder = Order.Builder.DFS; // default
         perfect = false; // default

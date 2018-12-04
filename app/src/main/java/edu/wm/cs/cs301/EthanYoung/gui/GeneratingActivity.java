@@ -20,7 +20,13 @@ import android.widget.Toast;
 
 import java.io.File;
 
-//import edu.wm.cs.cs301.EthanYoung.generation.VariableStorage;
+import edu.wm.cs.cs301.EthanYoung.generation.MazeConfiguration;
+import edu.wm.cs.cs301.EthanYoung.generation.MazeFactory;
+import edu.wm.cs.cs301.EthanYoung.generation.Order;
+import edu.wm.cs.cs301.EthanYoung.generation.OrderHelper;
+import edu.wm.cs.cs301.EthanYoung.generation.Order.Builder;
+
+//import edu.wm.cs.cs301.EthanYoung.VariableStorage;
 //import gui.Constants;
 //import gui.Controller;
 //import gui.RobotDriver;
@@ -39,8 +45,8 @@ public class GeneratingActivity extends AppCompatActivity {
     File savedFile;
     //MazeFileReader mfr;
     Boolean load;
-    //Controller cont;
-    //RobotDriver dri;
+    Controller cont;
+    RobotDriver dri;
     Boolean wentBack;
 
 
@@ -100,6 +106,25 @@ public class GeneratingActivity extends AppCompatActivity {
                     percent += 10;
                     timeDelay(1000);
                 }
+
+                MazeFactory fac = new MazeFactory(false);
+                Builder builder = Builder.DFS;
+                switch(algo){
+                    case "DFS":
+                        builder = Builder.DFS;
+                        break;
+                    case "Eller":
+                        builder = Builder.Eller;
+                        break;
+                    case "Prim":
+                        builder = Builder.Prim;
+                }
+
+                OrderHelper ord = new OrderHelper(level, builder, true);
+                fac.order(ord);
+                fac.waitTillDelivered();
+                MazeConfiguration config = ord.getConfig();
+
                 /*cont = createController(algo);
                 if (rob == "Manual") {
                     cont.driverType = 0;
@@ -116,7 +141,7 @@ public class GeneratingActivity extends AppCompatActivity {
                 else {
                     cont.driverType = 0;
                 }
-                VariableStorage.controller = cont;
+                VariableStorage.cont = cont;
                 cont.start();
                 cont.keyDown(Constants.UserInput.Start, level);*/
             }
@@ -137,7 +162,7 @@ public class GeneratingActivity extends AppCompatActivity {
         }
     }
 
-    /**
+    /*/**
      * Instantiates a controller with settings according to the given parameter.
      * @param //parameter can identify a generation method (Prim, Kruskal, Eller)
      * or a filename that contains a generated maze that is then loaded,
@@ -156,20 +181,20 @@ public class GeneratingActivity extends AppCompatActivity {
         else if ("Prim".equalsIgnoreCase(parameter))
         {
             msg = "MazeApplication: generating random maze with Prim's algorithm.";
-            result.setBuilder(generation.Order.Builder.Prim);
+            result.setBuilder(Order.Builder.Prim);
         }
         // Case 3 a and b: Eller, Kruskal or some other generation algorithm
         else if ("Kruskal".equalsIgnoreCase(parameter))
         {
             // TODO: for P2 assignment, please add code to set the builder accordingly
             msg = "MazeApplication: generating random maze with Kruskal's algorithm.";
-            result.setBuilder(generation.Order.Builder.Kruskal);
+            result.setBuilder(Order.Builder.Kruskal);
         }
         else if ("Eller".equalsIgnoreCase(parameter))
         {
             // TODO: for P2 assignment, please add code to set the builder accordingly
             msg = "MazeApplication: generating random maze with Eller's algorithm.";
-            result.setBuilder(generation.Order.Builder.Eller);
+            result.setBuilder(Order.Builder.Eller);
         }
         else if("noG".equalsIgnoreCase(parameter)) {
             msg = "MazeApplication: generating random maze with no graphics.";

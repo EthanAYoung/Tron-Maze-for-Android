@@ -12,6 +12,7 @@ import android.view.View;
 
 import edu.wm.cs.cs301.EthanYoung.generation.Seg;
 
+
 /**
  * Add functionality for double buffering to an AWT Panel class.
  * Used for drawing a maze.
@@ -75,7 +76,8 @@ public class MazePanel extends View {
         super.onDraw(canvas);
         canvas.drawBitmap(bMap,0,0, null);
         Log.v("onDraw Check" , "******** onDraw Check ********");
-        drawSomeShapes();
+        //drawSomeShapes();
+        drawCorners();
     }
 
     @Override
@@ -114,6 +116,13 @@ public class MazePanel extends View {
         can.drawLine(350, 30, 400, 400, paint);
         can.drawLine(320, 0, 380, 380, paint);
 
+    }
+
+    protected void drawCorners(){
+        can.drawRect(0,0,100,100, paint);
+        can.drawRect(300,0,400,100, paint);
+        can.drawRect(0,300,100,400, paint);
+        can.drawRect(300,300,400,400, paint);
     }
 
     /**
@@ -270,47 +279,8 @@ public class MazePanel extends View {
      */
     public int col;
 
-    /**
-     * Default minimum value for RGB values.
-     */
-    private static final int RGB_DEF = 20;
 
-    /**
-     * Determine and set the color for this segment.
-     *
-     * @param distance
-     *            to exit
-     * @param cc
-     *            obscure
-     */
-    public void initColor(final int distance, final int cc, Seg segment) {
-        /*final int d = distance / 4;
-        // mod used to limit the number of colors to 6
-        final int rgbValue = segment.calculateRGBValue(d);
-        switch (((d >> 3) ^ cc) % 6) {
-            case 0:
-                setColor(new Color(rgbValue, RGB_DEF, RGB_DEF));
-                break;
-            case 1:
-                setColor(new Color(RGB_DEF, rgbValue, RGB_DEF));
-                break;
-            case 2:
-                setColor(new Color(RGB_DEF, RGB_DEF, rgbValue));
-                break;
-            case 3:
-                setColor(new Color(rgbValue, rgbValue, RGB_DEF));
-                break;
-            case 4:
-                setColor(new Color(RGB_DEF, rgbValue, rgbValue));
-                break;
-            case 5:
-                setColor(new Color(rgbValue, RGB_DEF, rgbValue));
-                break;
-            default:
-                setColor(new Color(RGB_DEF, RGB_DEF, RGB_DEF));
-                break;
-        }*/
-    }
+
 
     /**
      * @return the color
@@ -346,7 +316,7 @@ public class MazePanel extends View {
     public boolean colorsEqual(Seg o) {
         //return (col == o.panel.getColor());
         Seg a = o;
-        return col == o.panel.getColor();
+        return col == o.col;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
