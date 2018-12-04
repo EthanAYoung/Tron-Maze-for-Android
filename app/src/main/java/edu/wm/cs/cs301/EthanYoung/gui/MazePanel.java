@@ -6,14 +6,11 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.media.Image;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 
-import java.util.ArrayList;
-
-//import edu.wm.cs.cs301.EthanYoung.gui.VariableStorage;
+import edu.wm.cs.cs301.EthanYoung.generation.Seg;
 
 /**
  * Add functionality for double buffering to an AWT Panel class.
@@ -51,7 +48,7 @@ public class MazePanel extends View {
         System.out.println("Super check");
         Log.v("super Check" , "******** Super Check ********");
         bMap = Bitmap.createBitmap(400, 400, Bitmap.Config.ARGB_8888);
-        //VariableStorage.getInstance().setBMap(bMap);
+        VariableStorage.getInstance().setBMap(bMap);
         can = new Canvas(bMap);
         paint = new Paint();
         paint.setColor(Color.RED);
@@ -286,7 +283,7 @@ public class MazePanel extends View {
      * @param cc
      *            obscure
      */
-    public void initColor(final int distance, final int cc/*, Seg segment*/) {
+    public void initColor(final int distance, final int cc, Seg segment) {
         /*final int d = distance / 4;
         // mod used to limit the number of colors to 6
         final int rgbValue = segment.calculateRGBValue(d);
@@ -346,9 +343,10 @@ public class MazePanel extends View {
      * and the other color is from a different
      * seg object's panel's col
      */
-    public boolean colorsEqual(/*Seg o*/) {
+    public boolean colorsEqual(Seg o) {
         //return (col == o.panel.getColor());
-        return col == 15;
+        Seg a = o;
+        return col == o.panel.getColor();
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
