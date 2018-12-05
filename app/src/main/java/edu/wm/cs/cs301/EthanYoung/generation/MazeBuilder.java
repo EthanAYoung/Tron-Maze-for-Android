@@ -39,6 +39,7 @@ public class MazeBuilder implements Runnable {
 	static final int MAX_TRIES = 250 ; // room generation: max number of tries to find a random location for a room
 	static final int MIN_ROOM_DIMENSION = 3; // room generation: min dimension
 	static final int MAX_ROOM_DIMENSION = 8; // room generation: max dimension
+	public BSPBuilder BSPBuild;
 
 	/**
 	 * Constructor for a randomized maze generation
@@ -100,6 +101,7 @@ public class MazeBuilder implements Runnable {
 
 			final int colchange = random.nextIntWithinInterval(0, 255); // used in the constructor for Segments  class Seg
 			final BSPBuilder b = new BSPBuilder(order, dists, cells, width, height, colchange, expectedPartiters) ;
+			BSPBuild = b;
 			BSPNode root = b.generateBSPNodes(); // takes a long time, updates progressbar,
 			// it also internally checks for cancel requests
 			// and throws an interrupted exception if that happens

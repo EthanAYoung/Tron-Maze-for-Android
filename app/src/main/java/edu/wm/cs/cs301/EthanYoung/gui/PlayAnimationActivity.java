@@ -29,6 +29,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import edu.wm.cs.cs301.EthanYoung.generation.MazeConfiguration;
+
 //import gui.Controller;
 //import gui.RobotDriver;
 
@@ -44,6 +46,7 @@ public class PlayAnimationActivity extends AppCompatActivity {
     Button fB;
     TextView pMsg;
     ProgressBar pBar;
+    MazeConfiguration config;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +64,8 @@ public class PlayAnimationActivity extends AppCompatActivity {
         paused = false;
 
         new batteryTracker().execute();
+
+        config = VariableStorage.config;
 
         /*Controller cont = VariableStorage.controller;
         RobotDriver dri = cont.getDriver();

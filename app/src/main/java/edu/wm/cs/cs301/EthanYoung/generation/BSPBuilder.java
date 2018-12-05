@@ -1,8 +1,12 @@
 package edu.wm.cs.cs301.EthanYoung.generation;
 
+import android.util.Log;
+
 import edu.wm.cs.cs301.EthanYoung.gui.Constants;
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import edu.wm.cs.cs301.EthanYoung.gui.GeneratingActivity.MazeGenerator;
 
 /**
  * This class has the responsibility to obtain the tree of BSP nodes for a given maze.
@@ -23,6 +27,8 @@ public class BSPBuilder {
     // only usage is in updateProgressBar to estimate progress made in the BSP tree construction
     int partiters = 0 ; // relocated from MazeBuilder attribute partiters here.
     private final Order order ; 		// current order
+    public int progress;
+    public MazeGenerator mGen;
     /**
      * Constructor
      * @param order
@@ -189,6 +195,10 @@ public class BSPBuilder {
         int percentage = partiters*100/expectedPartiters ;
         if (null != order) {
             order.updateProgress(percentage) ;
+            progress = percentage;
+            //Log.v("update", "update");
+           // mGen.update();
+            //Log.v("update done", "update done");
             if (percentage < 100) {
                 // give main thread a chance to process keyboard events
                 Thread.currentThread().sleep(10);

@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import java.io.File;
 
+import edu.wm.cs.cs301.EthanYoung.generation.MazeBuilder;
 import edu.wm.cs.cs301.EthanYoung.generation.MazeConfiguration;
 import edu.wm.cs.cs301.EthanYoung.generation.MazeFactory;
 import edu.wm.cs.cs301.EthanYoung.generation.Order;
@@ -48,6 +49,7 @@ public class GeneratingActivity extends AppCompatActivity {
     Controller cont;
     RobotDriver dri;
     Boolean wentBack;
+    MazeBuilder mBuild;
 
 
     @Override
@@ -67,6 +69,7 @@ public class GeneratingActivity extends AppCompatActivity {
 
 
         new MazeGenerator().execute();
+        //new BarUpdater().execute();
 
         /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -85,7 +88,7 @@ public class GeneratingActivity extends AppCompatActivity {
      * Handles the generation of the maze in the background
      * Also updates the progress bar
      */
-    class MazeGenerator extends AsyncTask<Context, Integer, String> {
+    class BarUpdater extends AsyncTask<Context, Integer, String> {
 
         @Override
         protected String doInBackground(Context...params) {
@@ -99,31 +102,10 @@ public class GeneratingActivity extends AppCompatActivity {
                 }
             }
             else {
-                int percent = 0;
-                for(int i = 0; i < 10; i++){
-                    //pBar.incrementProgressBy(percent);
+                while(mBuild.BSPBuild.progress*2 < 100){
                     publishProgress();
-                    percent += 10;
-                    timeDelay(1000);
+                    Log.v("progress", ""+(mBuild.BSPBuild.progress*2));
                 }
-
-                MazeFactory fac = new MazeFactory(false);
-                Builder builder = Builder.DFS;
-                switch(algo){
-                    case "DFS":
-                        builder = Builder.DFS;
-                        break;
-                    case "Eller":
-                        builder = Builder.Eller;
-                        break;
-                    case "Prim":
-                        builder = Builder.Prim;
-                }
-
-                OrderHelper ord = new OrderHelper(level, builder, true);
-                fac.order(ord);
-                fac.waitTillDelivered();
-                MazeConfiguration config = ord.getConfig();
 
                 /*cont = createController(algo);
                 if (rob == "Manual") {
@@ -158,7 +140,57 @@ public class GeneratingActivity extends AppCompatActivity {
 
         @Override
         protected void onProgressUpdate(Integer... values) {
-            pBar.incrementProgressBy(10);
+            Log.v("publishing", "publishing");
+            pBar.incrementProgressBy(mBuild.BSPBuild.progress);
+        }
+    }
+
+    public class MazeGenerator extends AsyncTask<Context, Integer, String> {
+        @Override
+        protected String doInBackground(Context...params){
+            MazeFactory fac = new MazeFactory(false);
+            Builder builder = Builder.DFS;
+            switch(algo){
+                case "DFS":
+                    builder = Builder.DFS;
+                    break;
+                case "Eller":
+                    builder = Builder.Eller;
+                    break;
+                case "Prim":
+                    builder = Builder.Prim;
+            }
+            OrderHelper ord = new OrderHelper(level, builder, true);
+            fac.order(ord);
+            mBuild = fac.getMazeBuilder();
+            //mBuild.BSPBuild.mGen = this;
+            fac.waitTillDelivered();
+            Log.v("gen done", "gen done");
+            publishProgress();
+            MazeConfiguration config = ord.getConfig();
+            VariableStorage.config = config;
+            timeDelay(3000);
+
+            if(wentBack == false) {
+                if (rob.equals("Manual")) {
+                    moveOn(true);
+                }
+                else {
+                    moveOn(false);
+                }
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            Log.v("publishing", "publishing");
+            pBar.incrementProgressBy(mBuild.BSPBuild.progress);
+        }
+
+        public void update(){
+            publishProgress();
         }
     }
 

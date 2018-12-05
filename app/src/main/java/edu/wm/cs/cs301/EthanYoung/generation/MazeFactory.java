@@ -93,6 +93,10 @@ public class MazeFactory implements Factory {
 		builder = null;
 		currentOrder = null;
 	}
+
+	public MazeBuilder getMazeBuilder(){
+		return builder;
+	}
 	///////////////////////// private methods ///////////////////////////////////
 	/**
 	 * Provide the builder with necessary input and start its execution

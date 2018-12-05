@@ -2,11 +2,14 @@ package edu.wm.cs.cs301.EthanYoung.gui;
 
 import android.graphics.Bitmap;
 
+import edu.wm.cs.cs301.EthanYoung.generation.MazeConfiguration;
+
 public class VariableStorage {
 
     static Controller cont;
     static Bitmap bMap;
     private static MazePanel panel;
+    static MazeConfiguration config;
 
     public static MazePanel getMazePanel() {
         return panel;

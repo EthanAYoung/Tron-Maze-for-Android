@@ -28,6 +28,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import edu.wm.cs.cs301.EthanYoung.generation.MazeConfiguration;
+
 //import gui.Constants;
 //import gui.Controller;
 //import gui.ManualDriver;
@@ -49,6 +51,7 @@ public class PlayManuallyActivity extends AppCompatActivity {
     Button lB;
     TextView pMsg;
     String rob;
+    MazeConfiguration config;
 
 
     @Override
@@ -72,6 +75,7 @@ public class PlayManuallyActivity extends AppCompatActivity {
         Intent intent = getIntent();
         rob = intent.getStringExtra("robot");
 
+        config = VariableStorage.config;
         //cont = VariableStorage.controller;
         //dri = (ManualDriver) cont.getDriver();
 
