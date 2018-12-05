@@ -39,7 +39,7 @@ import edu.wm.cs.cs301.EthanYoung.generation.MazeConfiguration;
 public class PlayManuallyActivity extends AppCompatActivity {
 
     //Controller cont;
-    //ManualDriver dri;
+    ManualDriver dri;
     Boolean seeButts;
     Boolean paused;
     Button pB;
@@ -99,7 +99,7 @@ public class PlayManuallyActivity extends AppCompatActivity {
     public void go(View view) {
         Log.v("ForwardButton" , "Going forward one space");
         Toast.makeText(PlayManuallyActivity.this, "Forward Pushed", Toast.LENGTH_SHORT).show();
-        //dri.go();
+        dri.go();
     }
 
     /**
@@ -108,7 +108,7 @@ public class PlayManuallyActivity extends AppCompatActivity {
     public void turnR(View view) {
         Log.v("RightButton" , "Turning to the right");
         Toast.makeText(PlayManuallyActivity.this, "Right Pushed", Toast.LENGTH_SHORT).show();
-        //dri.rotateR();
+        dri.rotateR();
     }
 
     /**
@@ -117,7 +117,7 @@ public class PlayManuallyActivity extends AppCompatActivity {
     public void turnL(View view) {
         Log.v("LeftButton" , "Turning to the left");
         Toast.makeText(PlayManuallyActivity.this, "Left Pushed", Toast.LENGTH_SHORT).show();
-        //dri.rotateL();
+        dri.rotateL();
     }
 
     /**
@@ -129,8 +129,8 @@ public class PlayManuallyActivity extends AppCompatActivity {
         //cont.keyDown(Constants.UserInput.ToggleLocalMap, 0);
         if(seeButts){
             seeButts = false;
-            //sB.setVisibility(View.INVISIBLE);
-            //fB.setVisibility(View.INVISIBLE);
+            sB.setVisibility(View.INVISIBLE);
+            fB.setVisibility(View.INVISIBLE);
         }
         else{
             seeButts = true;
