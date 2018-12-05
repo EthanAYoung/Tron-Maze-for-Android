@@ -33,7 +33,7 @@ public class StatePlaying extends DefaultState {
 	FirstPersonDrawer firstPersonView;
 	MapDrawer mapView;
     MazePanel panel;
-    Controller control;
+    //Controller control;
     
     MazeConfiguration mazeConfig ; 
     
@@ -58,6 +58,8 @@ public class StatePlaying extends DefaultState {
 
     
     boolean started;
+
+    public PlayManuallyActivity pMA;
     
     public StatePlaying() {
         started = false;
@@ -71,13 +73,13 @@ public class StatePlaying extends DefaultState {
      * If the panel is null, all drawing operations are skipped.
      * This mode of operation is useful for testing purposes, 
      * i.e., a dryrun of the game without the graphics part.
-     * @param controller provides access to the controller this state resides in
+     //* @param controller provides access to the controller this state resides in
      * @param panel is part of the UI and visible on the screen, needed for drawing
      */
-    public void start(Controller controller, MazePanel panel) {
+    public void start(MazePanel panel) {
         started = true;
         // keep the reference to the controller to be able to call method to switch the state
-        control = controller;
+        //control = controller;
         // keep the reference to the panel for drawing
         this.panel = panel;
         //
@@ -156,7 +158,8 @@ public class StatePlaying extends DefaultState {
             walk(1);
             // check termination, did we leave the maze?
             if (isOutside(px,py)) {
-                control.switchFromPlayingToWinning(0);
+                //control.switchFromPlayingToWinning(0);
+                pMA.winNow();
             }
             break;
         case Left: // turn left
@@ -169,11 +172,13 @@ public class StatePlaying extends DefaultState {
             walk(-1);
             // check termination, did we leave the maze?
             if (isOutside(px,py)) {
-                control.switchFromPlayingToWinning(0);
+                //control.switchFromPlayingToWinning(0);
+                pMA.winNow();
             }
             break;
         case ReturnToTitle: // escape to title screen
-            control.switchToTitle();
+            //control.switchToTitle();
+            //returnToTitle();
             break;
         case Jump: // make a step forward even through a wall
             // go to position if within maze

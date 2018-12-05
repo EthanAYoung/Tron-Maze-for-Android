@@ -52,6 +52,8 @@ public class PlayManuallyActivity extends AppCompatActivity {
     TextView pMsg;
     String rob;
     MazeConfiguration config;
+    StatePlaying state;
+    MazePanel panel;
 
 
     @Override
@@ -68,6 +70,7 @@ public class PlayManuallyActivity extends AppCompatActivity {
         rB = (Button) findViewById(R.id.rightButt);
         lB = (Button) findViewById(R.id.leftButt);
         pMsg = (TextView) findViewById(R.id.pauseMsg);
+        panel = (MazePanel) findViewById(R.id.mazePanel);
 
         seeButts = false;
         paused = false;
@@ -76,6 +79,10 @@ public class PlayManuallyActivity extends AppCompatActivity {
         rob = intent.getStringExtra("robot");
 
         config = VariableStorage.config;
+        state = new StatePlaying();
+        state.setMazeConfiguration(config);
+        state.start(panel);
+
         //cont = VariableStorage.controller;
         //dri = (ManualDriver) cont.getDriver();
 
@@ -97,27 +104,39 @@ public class PlayManuallyActivity extends AppCompatActivity {
      * tells the robot to go forward
      */
     public void go(View view) {
+        if(paused){
+            return;
+        }
         Log.v("ForwardButton" , "Going forward one space");
         Toast.makeText(PlayManuallyActivity.this, "Forward Pushed", Toast.LENGTH_SHORT).show();
-        dri.go();
+        //dri.go();
+        state.keyDown(Constants.UserInput.Up, 0);
     }
 
     /**
      * tells the robot to turn right
      */
     public void turnR(View view) {
+        if(paused){
+            return;
+        }
         Log.v("RightButton" , "Turning to the right");
         Toast.makeText(PlayManuallyActivity.this, "Right Pushed", Toast.LENGTH_SHORT).show();
-        dri.rotateR();
+        //dri.rotateR();
+        state.keyDown(Constants.UserInput.Right, 0);
     }
 
     /**
      * tells the robot to turn left
      */
     public void turnL(View view) {
+        if(paused){
+            return;
+        }
         Log.v("LeftButton" , "Turning to the left");
         Toast.makeText(PlayManuallyActivity.this, "Left Pushed", Toast.LENGTH_SHORT).show();
-        dri.rotateL();
+        //dri.rotateL();
+        state.keyDown(Constants.UserInput.Left, 0);
     }
 
     /**
@@ -126,11 +145,11 @@ public class PlayManuallyActivity extends AppCompatActivity {
     public void showM(View view) {
         Log.v("LocalMapButton" , "Toggling local map");
         Toast.makeText(PlayManuallyActivity.this, "LocalMapButton Pushed", Toast.LENGTH_SHORT).show();
-        //cont.keyDown(Constants.UserInput.ToggleLocalMap, 0);
+        state.keyDown(Constants.UserInput.ToggleLocalMap, 0);
         if(seeButts){
             seeButts = false;
-            sB.setVisibility(View.INVISIBLE);
-            fB.setVisibility(View.INVISIBLE);
+            //sB.setVisibility(View.INVISIBLE);
+            //fB.setVisibility(View.INVISIBLE);
         }
         else{
             seeButts = true;
@@ -145,7 +164,7 @@ public class PlayManuallyActivity extends AppCompatActivity {
     public void showS(View view) {
         Log.v("SolutionButton" , "Toggling solution");
         Toast.makeText(PlayManuallyActivity.this, "SolutionButton Pushed", Toast.LENGTH_SHORT).show();
-        //cont.keyDown(Constants.UserInput.ToggleSolution, 0);
+        state.keyDown(Constants.UserInput.ToggleSolution, 0);
     }
 
     /**
@@ -154,7 +173,7 @@ public class PlayManuallyActivity extends AppCompatActivity {
     public void showF(View view) {
         Log.v("FullMapButton" , "Toggling full map");
         Toast.makeText(PlayManuallyActivity.this, "FullMapButton Pushed", Toast.LENGTH_SHORT).show();
-        //cont.keyDown(Constants.UserInput.ToggleFullMap, 0);
+        state.keyDown(Constants.UserInput.ToggleFullMap, 0);
     }
 
     /**
@@ -179,7 +198,7 @@ public class PlayManuallyActivity extends AppCompatActivity {
      * Wins the game
      * Transitions to WinningActivity
      */
-    public void winNow(View view) {
+    public void winNow() {
         Log.v("WinButton" , "Winning now");
         Toast.makeText(PlayManuallyActivity.this, "Go2Winning Pushed", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this , WinningActivity.class);
@@ -196,7 +215,7 @@ public class PlayManuallyActivity extends AppCompatActivity {
      * Loses the game
      * Transitions to LosingActivity
      */
-    public void loseNow(View view) {
+    public void loseNow() {
         Log.v("LoseButton" , "Losing now");
         Toast.makeText(PlayManuallyActivity.this, "Go2Loosing Pushed", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this , LosingActivity.class);

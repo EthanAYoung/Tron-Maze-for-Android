@@ -77,7 +77,7 @@ public class MazePanel extends View {
         canvas.drawBitmap(bMap,0,0, null);
         Log.v("onDraw Check" , "******** onDraw Check ********");
         //drawSomeShapes();
-        drawCorners();
+        //drawCorners();
     }
 
     @Override
