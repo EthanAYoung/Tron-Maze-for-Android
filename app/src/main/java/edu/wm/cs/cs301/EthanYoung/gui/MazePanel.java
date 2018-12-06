@@ -5,12 +5,18 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.Rect;
+import android.media.Image;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 
+import edu.wm.cs.cs301.EthanYoung.generation.CardinalDirection;
+import edu.wm.cs.cs301.EthanYoung.generation.Cells;
 import edu.wm.cs.cs301.EthanYoung.generation.Seg;
+
+import static edu.wm.cs.cs301.EthanYoung.gui.Constants.*;
 
 
 /**
@@ -33,13 +39,14 @@ public class MazePanel extends View {
     // bufferImage can only be initialized if the container is displayable,
     // uses a delayed initialization and relies on client class to call initBufferImage()
     // before first use
-    //private Image bufferImage;
+    private Image bufferImage;
     //private Graphics2D graphics; // obtained from bufferImage,
     // graphics is stored to allow clients to draw on the same graphics object repeatedly
     // has benefits if color settings should be remembered for subsequent drawing operations
     Bitmap bMap;
     Canvas can;
     Paint paint;
+    Paint tempPaint;
 
     /**
      * Constructor. Object is not focusable.
@@ -48,10 +55,11 @@ public class MazePanel extends View {
         super(context);
         System.out.println("Super check");
         Log.v("super Check" , "******** Super Check ********");
-        bMap = Bitmap.createBitmap(400, 400, Bitmap.Config.ARGB_8888);
+        bMap = Bitmap.createBitmap(VIEW_WIDTH, VIEW_HEIGHT, Bitmap.Config.ARGB_8888);
         VariableStorage.getInstance().setBMap(bMap);
         can = new Canvas(bMap);
         paint = new Paint();
+        tempPaint = new Paint();
         paint.setColor(Color.RED);
         System.out.println("variable check");
         Log.v("variable Check" , "******** Variable Check ********");
@@ -64,7 +72,7 @@ public class MazePanel extends View {
 
     public MazePanel(Context context, AttributeSet attributes){
         super(context, attributes);
-        bMap = Bitmap.createBitmap(400, 400, Bitmap.Config.ARGB_8888);
+        bMap = Bitmap.createBitmap(VIEW_WIDTH, VIEW_HEIGHT, Bitmap.Config.ARGB_8888);
         can = new Canvas(bMap);
         paint = new Paint();
         paint.setColor(Color.RED);
@@ -83,8 +91,8 @@ public class MazePanel extends View {
     @Override
     protected void onMeasure (int widthMeasureSpec, int heightMeasureSpec){
 
-        int defaultH = 300;
-        int defaultW = 300;
+        int defaultH = 800;
+        int defaultW = 800;
 
         int width = measureHelper(defaultW, widthMeasureSpec);
         int height = measureHelper(defaultH, heightMeasureSpec);
@@ -178,12 +186,14 @@ public class MazePanel extends View {
      * on the screen.
      */
     public void paint() {
-        /*if (null == g) {
+        if (null == can) {
             System.out.println("MazePanel.paint: no graphics object, skipping drawImage operation");
         }
         else {
-            g.drawImage(bufferImage,0,0,null);
-        }*/
+            //g.drawImage(bufferImage,0,0,null);
+            //can.drawBitmap(bMap,0,0, paint);
+            draw(can);
+        }
     }
 
     /**
@@ -198,9 +208,9 @@ public class MazePanel extends View {
      * when calling the update method.
      * @return graphics object to draw on, null if impossible to obtain image
      */
-    public void getBufferGraphics() { //not sure what to return for this
+    public Paint getBufferGraphics() { //not sure what to return for this
         // if necessary instantiate and store a graphics object for later use
-       /* if (null == graphics) {
+       /*if (null == graphics) {
             if (null == bufferImage) {
                 bufferImage = createImage(Constants.VIEW_WIDTH, Constants.VIEW_HEIGHT);
                 if (null == bufferImage)
@@ -225,6 +235,7 @@ public class MazePanel extends View {
             }
         }
         return graphics;*/
+        return new Paint(Color.RED);
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -247,8 +258,8 @@ public class MazePanel extends View {
     private void drawBackground(int viewWidth, int viewHeight) {
         paint.setColor(Color.BLACK);
         drawRect(0, 0, viewWidth, viewHeight/2);
-        paint.setColor(Color.GREEN);
-        drawRect(0, 0, viewWidth, viewHeight/2);
+        paint.setColor(Color.DKGRAY);
+        drawRect(0, viewHeight/2, viewWidth, viewHeight/2);
 
         /*// black rectangle in upper half of screen
         graphics.setColor(Color.black);
@@ -261,14 +272,9 @@ public class MazePanel extends View {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //MapDrawer
 
-    /*public void setLineColor(Cells seenCells, CardinalDirection dir, int x, int y) {
+    public void setLineColor(Cells seenCells, CardinalDirection dir, int x, int y) {
         // TODO Auto-generated method stub
-        tempG.setColor(seenCells.hasWall(x,y, dir) ? Color.white : Color.gray);
-    }*/
-
-    public void setLineColor() {
-        // TODO Auto-generated method stub
-        //tempG.setColor(seenCells.hasWall(x,y, dir) ? Color.white : Color.gray);
+        tempPaint.setColor(seenCells.hasWall(x,y, dir) ? Color.BLACK : Color.GRAY);
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////
@@ -369,7 +375,7 @@ public class MazePanel extends View {
      */
     public void setGcToG() {
         // TODO Auto-generated method stub
-        //gc = (Graphics2D) tempG ;
+        paint = tempPaint ;
     }
 
     /**
@@ -380,10 +386,22 @@ public class MazePanel extends View {
     public void drawHelper(int viewWidth, int viewHeight) {
         // update graphics
         // draw background figure: black on bottom half, grey on top half
-        //drawBackground(viewWidth, viewWidth);
+        drawBackground(viewWidth, viewWidth);
         // set color to white and draw what ever can be seen from the current position
-        //tempG.setColor(Color.WHITE);
+        tempPaint.setColor(Color.WHITE);
 
+    }
+
+    public void drawPolygon(int[] xps, int [] yps, int z){
+        Path path = new Path();
+        path.moveTo(xps[0], yps[0]);
+
+        for(int i = 1; i < z; i++) {
+            path.lineTo(xps[i], yps[i]);
+        }
+        path.moveTo(xps[0], yps[0]);
+
+        can.drawPath(path,paint);
     }
 
 }

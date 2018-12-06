@@ -3,6 +3,9 @@
  */
 package edu.wm.cs.cs301.EthanYoung.gui;
 
+import android.graphics.Paint;
+import android.util.Log;
+
 import edu.wm.cs.cs301.EthanYoung.generation.CardinalDirection;
 import edu.wm.cs.cs301.EthanYoung.generation.Cells;
 import edu.wm.cs.cs301.EthanYoung.generation.MazeConfiguration;
@@ -124,7 +127,7 @@ public class MapDrawer {
 	 */
 	public void draw(MazePanel panel, int x, int y, int angle, int walkStep,
 			boolean showMaze, boolean showSolution) {
-		//panel.tempG = panel.getBufferGraphics() ;
+		panel.tempPaint = panel.getBufferGraphics() ;
         // viewers draw on the buffer graphics
         if (null == panel) {
             System.out.println("MapDrawer.draw: can't get graphics object to draw on, skipping draw operation") ;
@@ -160,7 +163,7 @@ public class MapDrawer {
 		final int mazeWidth = mazeConfig.getWidth() ;
 		final int mazeHeight = mazeConfig.getHeight() ;
 		
-		//panel.tempG.setColor(panel.newColor("white"));
+		panel.tempPaint.setColor(panel.newColor("white"));
 		
 		// note: 1/2 of width and height is the center of the screen
 		// the whole map is centered at the current position
@@ -191,22 +194,22 @@ public class MapDrawer {
 						mazeConfig.hasWall(x,y, CardinalDirection.North) :
 							mazeConfig.hasWall(x,y-1, CardinalDirection.South));
 
-				//panel.setLineColor(seenCells, CardinalDirection.North, x, y);
+				panel.setLineColor(seenCells, CardinalDirection.North, x, y);
 				//panel.tempG.setColor(seenCells.hasWall(x,y, CardinalDirection.North) ? Color.white : Color.gray);
-				//if ((seenCells.hasWall(x,y, CardinalDirection.North) || showMaze) && theCondition)
-					//panel.tempG.drawLine(startX, startY, startX + mapScale, startY); // y coordinate same
+				if ((seenCells.hasWall(x,y, CardinalDirection.North) || showMaze) && theCondition)
+					panel.can.drawLine(startX, startY, startX + mapScale, startY, panel.tempPaint); // y coordinate same
 				
 				// draw vertical line
 				theCondition = (y >= mazeHeight) ? false : ((x < mazeWidth) ?
 						mazeConfig.hasWall(x,y, CardinalDirection.West) :
 							mazeConfig.hasWall((x-1),y, CardinalDirection.East));
 				
-				//panel.setLineColor(seenCells, CardinalDirection.West, x, y);
+				panel.setLineColor(seenCells, CardinalDirection.West, x, y);
 				//panel.tempG.setColor(seenCells.hasWall(x,y, CardinalDirection.West) ? Color.white : Color.gray);
-				//if ((seenCells.hasWall(x,y, CardinalDirection.West) || showMaze) && theCondition)
-					//panel.tempG.drawLine(startX, startY, startX, startY - mapScale); // x coordinate same
+				if ((seenCells.hasWall(x,y, CardinalDirection.West) || showMaze) && theCondition)
+					panel.can.drawLine(startX, startY, startX, startY - mapScale, panel.tempPaint); // x coordinate same
 			}
-		
+		Log.v("showSolution", ""+showSolution);
 		if (showSolution) {
 			drawSolution(offsetX, offsetY, px, py) ;
 		}
@@ -320,16 +323,16 @@ public class MapDrawer {
 	 //* @param gc to draw on
 	 */
 	private void drawCurrentLocation(int viewDX, int viewDY) {
-		//panel.tempG.setColor(panel.newColor("red"));
+		panel.tempPaint.setColor(panel.newColor("red"));
 		// draw oval of appropriate size at the center of the screen
 		int centerX = viewWidth/2; // center x
 		int centerY = viewHeight/2; // center y
-		int diameter = mapScale/2; // circle size
+		int diameter = mapScale/20; // circle size
 		// we need the top left corner of a bounding box the circle is in
 		// and its width and height to draw the circle
 		// top left corner is (centerX-radius, centerY-radius)
 		// width and height is simply the diameter
-		//panel.tempG.fillOval(centerX-diameter/2, centerY-diameter/2, diameter, diameter);
+		panel.can.drawOval(centerX-diameter/2, centerY-diameter/2, centerX+diameter/2, centerY+diameter/2, panel.tempPaint);
 		// draw a red arrow with the oval to show current direction
 		drawArrow(viewDX, viewDY, centerX, centerY);
 	}
@@ -349,7 +352,7 @@ public class MapDrawer {
 		final int tipX = startX + mapToOffset(arrowLength, viewDX);
 		final int tipY = startY - mapToOffset(arrowLength, viewDY);
 		// draw main line, goes from starting (x,y) to end (tipX,tipY)
-		//panel.tempG.drawLine(startX, startY, tipX, tipY);
+		panel.can.drawLine(startX, startY, tipX, tipY, panel.tempPaint);
 		// calculate length and positions for 2 lines pointing towards (tipX,tipY)
 		// find intermediate point (tmpX,tmpY) on main line
 		final int length = mapScale/4;
@@ -365,8 +368,8 @@ public class MapDrawer {
 		final int offsetX = mapToOffset(length, -viewDY);
 		final int offsetY = mapToOffset(length, -viewDX);
 		// draw two lines, starting at tip of arrow
-		//panel.tempG.drawLine(tipX, tipY, tmpX + offsetX, tmpY + offsetY);
-		//panel.tempG.drawLine(tipX, tipY, tmpX - offsetX, tmpY - offsetY);
+		panel.can.drawLine(tipX, tipY, tmpX + offsetX, tmpY + offsetY, panel.tempPaint);
+		panel.can.drawLine(tipX, tipY, tmpX - offsetX, tmpY - offsetY, panel.tempPaint);
 	}
 
 
@@ -396,7 +399,7 @@ public class MapDrawer {
 		int sy = py;
 		int distance = mazeConfig.getDistanceToExit(sx, sy);
 		
-		//panel.gc.setColor(panel.newColor("yellow"));
+		panel.paint.setColor(panel.newColor("yellow"));
 		
 		// while we are more than 1 step away from the final position
 		while (distance > 1) {
@@ -426,7 +429,7 @@ public class MapDrawer {
 			//int ny2 = view_height-1-(neighbor[1]*map_scale + offy) - map_scale/2;
 			int nx2 = mapToCoordinateX(neighbor[0],offsetX) + mapScale/2;
 			int ny2 = mapToCoordinateY(neighbor[1],offsetY) - mapScale/2;
-			//panel.gc.drawLine(nx1, ny1, nx2, ny2);
+			panel.can.drawLine(nx1, ny1, nx2, ny2, panel.paint);
 			
 			// update loop variables for current position (sx,sy)
 			// and distance d for next iteration

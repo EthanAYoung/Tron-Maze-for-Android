@@ -54,6 +54,8 @@ public class PlayManuallyActivity extends AppCompatActivity {
     MazeConfiguration config;
     StatePlaying state;
     MazePanel panel;
+    int shortestPathL;
+    int pathL;
 
 
     @Override
@@ -75,12 +77,19 @@ public class PlayManuallyActivity extends AppCompatActivity {
         seeButts = false;
         paused = false;
 
+        pathL = 0;
+
         Intent intent = getIntent();
         rob = intent.getStringExtra("robot");
 
         config = VariableStorage.config;
+
+        int[] startPos = config.getStartingPosition();
+        shortestPathL = config.getDistanceToExit(startPos[0], startPos[1]);
+
         state = new StatePlaying();
         state.setMazeConfiguration(config);
+        state.pMA = this;
         state.start(panel);
 
         //cont = VariableStorage.controller;
@@ -107,6 +116,7 @@ public class PlayManuallyActivity extends AppCompatActivity {
         if(paused){
             return;
         }
+        pathL++;
         Log.v("ForwardButton" , "Going forward one space");
         Toast.makeText(PlayManuallyActivity.this, "Forward Pushed", Toast.LENGTH_SHORT).show();
         //dri.go();
@@ -148,8 +158,8 @@ public class PlayManuallyActivity extends AppCompatActivity {
         state.keyDown(Constants.UserInput.ToggleLocalMap, 0);
         if(seeButts){
             seeButts = false;
-            //sB.setVisibility(View.INVISIBLE);
-            //fB.setVisibility(View.INVISIBLE);
+            sB.setVisibility(View.INVISIBLE);
+            fB.setVisibility(View.INVISIBLE);
         }
         else{
             seeButts = true;
@@ -204,8 +214,8 @@ public class PlayManuallyActivity extends AppCompatActivity {
         Intent intent = new Intent(this , WinningActivity.class);
         intent.putExtra("ogBatt" , 3000);
         intent.putExtra("currBatt", 50);
-        intent.putExtra("pathL" , 32);
-        intent.putExtra("shortPathL" , 4);
+        intent.putExtra("pathL" , pathL);
+        intent.putExtra("shortPathL" , shortestPathL);
         intent.putExtra("manual" , true);
 
         startActivity(intent);

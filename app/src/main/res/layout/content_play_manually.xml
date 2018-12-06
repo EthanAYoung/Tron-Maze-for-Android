@@ -60,7 +60,7 @@
         android:layout_marginBottom="9dp"
         android:onClick="showS"
         android:text="Solution"
-        android:visibility="visible"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -72,7 +72,7 @@
         android:layout_marginBottom="9dp"
         android:onClick="showF"
         android:text="Full Map"
-        android:visibility="visible"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/solButt" />
 
@@ -114,10 +114,10 @@
 
     <edu.wm.cs.cs301.EthanYoung.gui.MazePanel
         android:id="@+id/mazePanel"
-        android:layout_width="186dp"
-        android:layout_height="208dp"
+        android:layout_width="357dp"
+        android:layout_height="344dp"
         android:layout_marginStart="91dp"
-        android:layout_marginTop="86dp"
+        android:layout_marginTop="39dp"
         android:layout_marginEnd="91dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
