@@ -9,6 +9,27 @@
     tools:showIn="@layout/activity_play_manually">
 
     <Button
+        android:id="@+id/smallerButt"
+        android:layout_width="66dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="13dp"
+        android:onClick="decrementMap"
+        android:text="-"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/mapButt"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/largerButt"
+        android:layout_width="66dp"
+        android:layout_height="39dp"
+        android:onClick="enlargeMap"
+        android:text="+"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/mapButt"
+        app:layout_constraintStart_toEndOf="@+id/smallerButt" />
+
+    <Button
         android:id="@+id/upButt"
         android:layout_width="45dp"
         android:layout_height="40dp"

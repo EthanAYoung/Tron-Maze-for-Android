@@ -49,6 +49,8 @@ public class PlayManuallyActivity extends AppCompatActivity {
     Button uB;
     Button rB;
     Button lB;
+    Button eB;
+    Button dB;
     TextView pMsg;
     String rob;
     MazeConfiguration config;
@@ -71,6 +73,8 @@ public class PlayManuallyActivity extends AppCompatActivity {
         uB = (Button) findViewById(R.id.upButt);
         rB = (Button) findViewById(R.id.rightButt);
         lB = (Button) findViewById(R.id.leftButt);
+        eB = (Button) findViewById(R.id.largerButt);
+        dB = (Button) findViewById(R.id.smallerButt);
         pMsg = (TextView) findViewById(R.id.pauseMsg);
         panel = (MazePanel) findViewById(R.id.mazePanel);
 
@@ -160,11 +164,15 @@ public class PlayManuallyActivity extends AppCompatActivity {
             seeButts = false;
             sB.setVisibility(View.INVISIBLE);
             fB.setVisibility(View.INVISIBLE);
+            eB.setVisibility(View.INVISIBLE);
+            dB.setVisibility(View.INVISIBLE);
         }
         else{
             seeButts = true;
             sB.setVisibility(View.VISIBLE);
             fB.setVisibility(View.VISIBLE);
+            eB.setVisibility(View.VISIBLE);
+            dB.setVisibility(View.VISIBLE);
         }
     }
 
@@ -248,4 +256,21 @@ public class PlayManuallyActivity extends AppCompatActivity {
         Intent intent = new Intent(this , AMazeActivity.class);
         startActivity(intent);
     }
+
+    /**
+     * Shows the full maze
+     */
+    public void enlargeMap(View view) {
+        Log.v("biggerButt" , "Enlarging map");
+        state.keyDown(Constants.UserInput.ZoomIn, 0);
+    }
+
+    /**
+     * Shows the full maze
+     */
+    public void decrementMap(View view) {
+        Log.v("smallerButt" , "Decrementing map");
+        state.keyDown(Constants.UserInput.ZoomOut, 0);
+    }
+
 }
