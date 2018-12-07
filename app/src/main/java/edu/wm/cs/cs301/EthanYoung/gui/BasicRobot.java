@@ -31,6 +31,7 @@ public class BasicRobot implements Robot {
 	boolean backSen;
 	public boolean dead;
 	public StatePlaying state;
+	public boolean paused;
 	
 	/**
      * Constructor for BasicRobot.java
@@ -47,11 +48,15 @@ public class BasicRobot implements Robot {
 		dead = false;
 		hasRS = true;
 		currDir = CardinalDirection.North;
+		paused = false;
 	}
 
 	@Override
 	public void rotate(Turn turn) {
 		// TODO Auto-generated method stub
+        if(paused){
+            return;
+        }
 		currDir = getCurrentDirection();
 		if(hasStopped() == false) {
 			switch(turn) {
@@ -81,6 +86,9 @@ public class BasicRobot implements Robot {
 	@Override
 	public void move(int distance, boolean manual) {
 		// TODO Auto-generated method stub
+        if(paused){
+            return;
+        }
 		if(hasStopped() == false && !cells.hasWall(pos[0], pos[1], getCurrentDirection())) {
 			for(int i = 0; i < distance; i++) {
 				state.keyDown(UserInput.Up, 0);
