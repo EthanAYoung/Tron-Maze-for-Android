@@ -60,6 +60,7 @@ public class StatePlaying extends DefaultState {
     boolean started;
 
     public PlayManuallyActivity pMA;
+    public PlayAnimationActivity pAA;
     
     public StatePlaying() {
         started = false;

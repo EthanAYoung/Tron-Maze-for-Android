@@ -9,6 +9,27 @@
     tools:showIn="@layout/activity_play_animation">
 
     <Button
+        android:id="@+id/smallerButt"
+        android:layout_width="66dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="13dp"
+        android:onClick="decrementMap"
+        android:text="-"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/mapButt"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/largerButt"
+        android:layout_width="66dp"
+        android:layout_height="39dp"
+        android:onClick="enlargeMap"
+        android:text="+"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/mapButt"
+        app:layout_constraintStart_toEndOf="@+id/smallerButt" />
+
+    <Button
         android:id="@+id/backButt3"
         android:layout_width="wrap_content"
         android:layout_height="35dp"
@@ -38,7 +59,7 @@
         android:layout_marginBottom="9dp"
         android:onClick="showS"
         android:text="Solution"
-        android:visibility="visible"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -50,7 +71,7 @@
         android:layout_marginBottom="9dp"
         android:onClick="showF"
         android:text="Full Map"
-        android:visibility="visible"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -93,11 +114,11 @@
 
     <edu.wm.cs.cs301.EthanYoung.gui.MazePanel
         android:id="@+id/mazePanel2"
-        android:layout_width="228dp"
-        android:layout_height="220dp"
-        android:layout_marginStart="91dp"
-        android:layout_marginTop="140dp"
-        android:layout_marginEnd="92dp"
+        android:layout_width="357dp"
+        android:layout_height="359dp"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="39dp"
+        android:layout_marginEnd="27dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/backButt3" />

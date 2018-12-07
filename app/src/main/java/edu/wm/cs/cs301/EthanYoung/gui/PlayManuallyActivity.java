@@ -258,7 +258,7 @@ public class PlayManuallyActivity extends AppCompatActivity {
     }
 
     /**
-     * Shows the full maze
+     * Zooms in on the maze
      */
     public void enlargeMap(View view) {
         Log.v("biggerButt" , "Enlarging map");
@@ -266,7 +266,7 @@ public class PlayManuallyActivity extends AppCompatActivity {
     }
 
     /**
-     * Shows the full maze
+     * Zooms out of the maze
      */
     public void decrementMap(View view) {
         Log.v("smallerButt" , "Decrementing map");

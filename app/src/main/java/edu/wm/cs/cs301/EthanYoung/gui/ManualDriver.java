@@ -101,7 +101,7 @@ public class ManualDriver implements RobotDriver {
 	@Override
 	public boolean keyDown(UserInput key, int value) {
 		// TODO Auto-generated method stub
-		if(((BasicRobot)rob).cont == null || ((BasicRobot)rob).cont.stateNum != 2) {
+		/*if(((BasicRobot)rob).cont == null || ((BasicRobot)rob).cont.stateNum != 2) {
 			return false;
 		}
 		switch(key) {
@@ -117,7 +117,7 @@ public class ManualDriver implements RobotDriver {
 			case Down:
 				rotateFull();
 				return true;
-		}
+		}*/
 		return false;
 	}
 

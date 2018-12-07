@@ -88,7 +88,7 @@ public class Explorer implements RobotDriver {
 		int[] room;
 		int[] doorCord;
 		int bestDoorVisits;
-		while(!rob.isAtExit() && rob.cont.stateNum == 2) {
+		while(!rob.isAtExit()) {
 			exit = rob.canSeeExit();
 			if(exit != null) {
 				if(exit == Direction.LEFT) {
@@ -216,10 +216,6 @@ public class Explorer implements RobotDriver {
 				//rob.timeDelay(2000);
 			}
 		}
-		if(rob.cont.stateNum != 2) {
-			done = true;
-			return false;
-		}
 		currDir = rob.getCurrentDirection();
 		result = rob.getExitDirection(dist);
 		rob.switchCDs(currDir, result);
@@ -301,10 +297,10 @@ public class Explorer implements RobotDriver {
 	@Override
 	public boolean keyDown(UserInput key, int value) {
 		// TODO Auto-generated method stub
-		if(((BasicRobot)rob).cont == null || ((BasicRobot)rob).cont.stateNum != 2) {
+		/*if(((BasicRobot)rob).cont == null || ((BasicRobot)rob).cont.stateNum != 2) {
 			return false;
 		}
-		/*switch(key) {
+		switch(key) {
 			case Left:
 				rotateL();
 				return true;

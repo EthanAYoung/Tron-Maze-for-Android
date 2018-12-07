@@ -77,7 +77,7 @@ public class Wizard implements RobotDriver {
 		int nx;
 		int ny;
 		boolean switchOn;
-		while(!rob.isAtExit() && rob.cont.stateNum == 2) {
+		while(!rob.isAtExit()) {
 			canGos = new boolean[] {false, false, false, false};
 			nx = currentX;
 			ny = currentY;
@@ -125,10 +125,6 @@ public class Wizard implements RobotDriver {
 				rob.switchCDs(currDir, result);
 				//rob.timeDelay(5000);
 			}
-		}
-		if(rob.cont.stateNum != 2) {
-			done = true;
-			return false;
 		}
 		currDir = rob.getCurrentDirection();
 		currentX = rob.pos[0];
@@ -219,10 +215,10 @@ public class Wizard implements RobotDriver {
 	@Override
 	public boolean keyDown(UserInput key, int value) {
 		// TODO Auto-generated method stub
-		if(((BasicRobot)rob).cont == null || ((BasicRobot)rob).cont.stateNum != 2) {
+		/*if(((BasicRobot)rob).cont == null || ((BasicRobot)rob).cont.stateNum != 2) {
 			return false;
 		}
-		/*switch(key) {
+		switch(key) {
 			case Left:
 				rotateL();
 				return true;

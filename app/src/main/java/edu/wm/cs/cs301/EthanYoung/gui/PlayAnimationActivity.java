@@ -44,9 +44,17 @@ public class PlayAnimationActivity extends AppCompatActivity {
     Button mB;
     Button sB;
     Button fB;
+    Button eB;
+    Button dB;
     TextView pMsg;
     ProgressBar pBar;
     MazeConfiguration config;
+    StatePlaying state;
+    MazePanel panel;
+    int shortestPathL;
+    int pathL;
+    String robType;
+    BasicRobot rob;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +65,11 @@ public class PlayAnimationActivity extends AppCompatActivity {
         mB = (Button) findViewById(R.id.mapButt);
         sB = (Button) findViewById(R.id.solButt);
         fB = (Button) findViewById(R.id.fullButt);
+        eB = (Button) findViewById(R.id.largerButt);
+        dB = (Button) findViewById(R.id.smallerButt);
         pMsg = (TextView) findViewById(R.id.pauseMsg);
         pBar = (ProgressBar) findViewById(R.id.progressBar);
+        panel = (MazePanel) findViewById(R.id.mazePanel);
 
         seeButts = false;
         paused = false;
@@ -67,25 +78,43 @@ public class PlayAnimationActivity extends AppCompatActivity {
 
         config = VariableStorage.config;
 
-        /*Controller cont = VariableStorage.controller;
-        RobotDriver dri = cont.getDriver();
+        int[] startPos = config.getStartingPosition();
+        shortestPathL = config.getDistanceToExit(startPos[0], startPos[1]);
+
+        state = new StatePlaying();
+        state.setMazeConfiguration(config);
+        state.pAA = this;
+
+        Intent intent = getIntent();
+        robType = intent.getStringExtra("robot");
+
+        RobotDriver dri;
+        switch(robType){
+            case "Wizard":
+                dri = new Wizard();
+                break;
+            case "WallFollower":
+                dri = new WallFollower();
+                break;
+            case "Explorer":
+                dri = new Explorer();
+                break;
+            default:
+                dri = new Wizard();
+                break;
+        }
+        rob = new BasicRobot();
+        dri.setRobot(rob);
+        rob.state = state;
+
+        state.start(panel);
         try {
             dri.drive2Exit();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
+        } catch(Exception e){
+            Log.v("Exception", "Exception on drive2Exit");
+        }
 
-        /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
     }
 
     /**
@@ -97,13 +126,17 @@ public class PlayAnimationActivity extends AppCompatActivity {
         //cont.keyDown(Constants.UserInput.ToggleLocalMap, 0);
         if(seeButts){
             seeButts = false;
-            //sB.setVisibility(View.INVISIBLE);
-            //fB.setVisibility(View.INVISIBLE);
+            sB.setVisibility(View.INVISIBLE);
+            fB.setVisibility(View.INVISIBLE);
+            eB.setVisibility(View.INVISIBLE);
+            dB.setVisibility(View.INVISIBLE);
         }
         else{
             seeButts = true;
             sB.setVisibility(View.VISIBLE);
             fB.setVisibility(View.VISIBLE);
+            eB.setVisibility(View.VISIBLE);
+            dB.setVisibility(View.VISIBLE);
         }
     }
 
@@ -214,6 +247,22 @@ public class PlayAnimationActivity extends AppCompatActivity {
         try {
             Thread.sleep(t);
         } catch (InterruptedException e) {}
+    }
+
+    /**
+     * Zooms in on the maze
+     */
+    public void enlargeMap(View view) {
+        Log.v("biggerButt" , "Enlarging map");
+        state.keyDown(Constants.UserInput.ZoomIn, 0);
+    }
+
+    /**
+     * Zooms out of the maze
+     */
+    public void decrementMap(View view) {
+        Log.v("smallerButt" , "Decrementing map");
+        state.keyDown(Constants.UserInput.ZoomOut, 0);
     }
 
 }

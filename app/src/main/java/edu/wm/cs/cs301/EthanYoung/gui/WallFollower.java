@@ -61,7 +61,7 @@ public class WallFollower implements RobotDriver {
 		int x;
 		int y;
 		CardinalDirection currDir;
-		while(!rob.isAtExit() && rob.cont.stateNum == 2) {
+		while(!rob.isAtExit()) {
 			x = rob.pos[0];
 			y = rob.pos[1];
 			currDir = rob.getCurrentDirection();
@@ -83,10 +83,6 @@ public class WallFollower implements RobotDriver {
 			}
 			System.out.println("---");
 			//rob.timeDelay(3000);
-		}
-		if(rob.cont.stateNum != 2) {
-			done = true;
-			return false;
 		}
 		x = rob.pos[0];
 		y = rob.pos[1];
@@ -204,10 +200,10 @@ public class WallFollower implements RobotDriver {
 	@Override
 	public boolean keyDown(UserInput key, int value) {
 		// TODO Auto-generated method stub
-		if(((BasicRobot)rob).cont == null || ((BasicRobot)rob).cont.stateNum != 2) {
+		/*if(((BasicRobot)rob).cont == null || ((BasicRobot)rob).cont.stateNum != 2) {
 			return false;
 		}
-		/*switch(key) {
+		switch(key) {
 			case Left:
 				rotateL();
 				return true;

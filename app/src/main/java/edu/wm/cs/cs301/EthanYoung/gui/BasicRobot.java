@@ -19,7 +19,6 @@ import edu.wm.cs.cs301.EthanYoung.gui.Constants.UserInput;
 public class BasicRobot implements Robot {
 	
 	float batt;
-	Controller cont;
 	int[] pos;
 	int pathL;
 	MazeConfiguration config;
@@ -31,6 +30,7 @@ public class BasicRobot implements Robot {
 	boolean fronSen;
 	boolean backSen;
 	public boolean dead;
+	public StatePlaying state;
 	
 	/**
      * Constructor for BasicRobot.java
@@ -58,20 +58,20 @@ public class BasicRobot implements Robot {
 				case LEFT:
 					if(batt >= 3) {
 						batt += -3;
-						cont.states[2].keyDown(UserInput.Left, 0);
+						state.keyDown(UserInput.Left, 0);
 					}
 					break;
 				case RIGHT:
 					if(batt >= 3) {
 						batt += -3;
-						cont.states[2].keyDown(UserInput.Right, 0);
+						state.keyDown(UserInput.Right, 0);
 					}
 					break;
 				case AROUND:
 					if(batt >= 6) {
 						batt += -6;
-						cont.states[2].keyDown(UserInput.Right, 0);
-						cont.states[2].keyDown(UserInput.Right, 0);
+						state.keyDown(UserInput.Right, 0);
+						state.keyDown(UserInput.Right, 0);
 					}
 					break;
 			}
@@ -83,9 +83,9 @@ public class BasicRobot implements Robot {
 		// TODO Auto-generated method stub
 		if(hasStopped() == false && !cells.hasWall(pos[0], pos[1], getCurrentDirection())) {
 			for(int i = 0; i < distance; i++) {
-				cont.states[2].keyDown(UserInput.Up, 0);
+				state.keyDown(UserInput.Up, 0);
 				batt -= 5;
-				pos = cont.getCurrentPosition();
+				pos = state.getCurrentPosition();
 				pathL += 1;
 				if(hasStopped() == true) {
 					break;
@@ -100,7 +100,7 @@ public class BasicRobot implements Robot {
 		if(config.getHeight() <= pos[1] || config.getWidth() <= pos[0] || config.getHeight() < 0 || config.getWidth() < 0) {
 			new Exception("OUT OF BOUNDS");
 		}
-		pos = cont.getCurrentPosition();
+		pos = state.getCurrentPosition();
 		return null;
 	}
 
@@ -108,7 +108,6 @@ public class BasicRobot implements Robot {
 	public void setMaze(Controller controller) {
 		// TODO Auto-generated method stub
 		config = controller.getMazeConfiguration();
-		cont = controller;
 		cells = config.getMazecells();
 	}
 
@@ -149,7 +148,7 @@ public class BasicRobot implements Robot {
 	@Override
 	public CardinalDirection getCurrentDirection() {
 		// TODO Auto-generated method stub
-		return cont.getCurrentDirection();
+		return state.getCurrentDirection();
 	}
 
 	@Override
@@ -193,7 +192,6 @@ public class BasicRobot implements Robot {
 		// TODO Auto-generated method stub
 		if(batt <= 0) {
 			dead = true;
-			cont.switchFromPlayingToWinning(getOdometerReading());
 			return true;
 		}
 		//if(cells.hasWall(pos[0], pos[1], getCurrentDirection())) {
