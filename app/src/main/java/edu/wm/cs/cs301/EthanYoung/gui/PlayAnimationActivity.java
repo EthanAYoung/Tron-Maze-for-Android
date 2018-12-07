@@ -51,6 +51,7 @@ public class PlayAnimationActivity extends AppCompatActivity {
     int pathL;
     String robType;
     BasicRobot rob;
+    RobotDriver dri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,12 +66,10 @@ public class PlayAnimationActivity extends AppCompatActivity {
         dB = (Button) findViewById(R.id.smallerButt);
         pMsg = (TextView) findViewById(R.id.pauseMsg);
         pBar = (ProgressBar) findViewById(R.id.progressBar);
-        panel = (MazePanel) findViewById(R.id.mazePanel);
+        panel = (MazePanel) findViewById(R.id.mazePanel2);
 
         seeButts = false;
         paused = false;
-
-        new batteryTracker().execute();
 
         config = VariableStorage.config;
 
@@ -80,11 +79,12 @@ public class PlayAnimationActivity extends AppCompatActivity {
         state = new StatePlaying();
         state.setMazeConfiguration(config);
         state.pAA = this;
+        state.manual = false;
+        panel.manual = false;
 
         Intent intent = getIntent();
         robType = intent.getStringExtra("robot");
 
-        RobotDriver dri;
         switch(robType){
             case "Wizard":
                 dri = new Wizard();
@@ -102,14 +102,12 @@ public class PlayAnimationActivity extends AppCompatActivity {
         rob = new BasicRobot();
         dri.setRobot(rob);
         rob.state = state;
+        rob.config = config;
+        rob.cells = config.getMazecells();
 
         state.start(panel);
-        try {
-            dri.drive2Exit();
-        } catch(Exception e){
-            Log.v("Exception", "Exception on drive2Exit");
-        }
 
+        new batteryTracker().execute();
 
     }
 
@@ -173,13 +171,22 @@ public class PlayAnimationActivity extends AppCompatActivity {
         rob.paused = paused;
     }
 
+    public void finish(){
+        if(rob.hasStopped()){
+            loseNow();
+        }
+        else{
+            winNow();
+        }
+    }
+
     /**
      * Wins the game
      * Transitions to WinningActivity
      */
-    public void winNow(View view) {
+    public void winNow() {
         Log.v("WinButton" , "Winning now");
-        Toast.makeText(PlayAnimationActivity.this, "Go2Winning Pushed", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(PlayAnimationActivity.this, "Go2Winning Pushed", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this , WinningActivity.class);
         intent.putExtra("ogBatt" , 3000);
         intent.putExtra("currBatt", 50);
@@ -194,9 +201,9 @@ public class PlayAnimationActivity extends AppCompatActivity {
      * Loses the game
      * Transitions to LosingActivity
      */
-    public void loseNow(View view) {
+    public void loseNow() {
         Log.v("LoseButton" , "Losing now");
-        Toast.makeText(PlayAnimationActivity.this, "Go2Loosing Pushed", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(PlayAnimationActivity.this, "Go2Loosing Pushed", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this , LosingActivity.class);
         intent.putExtra("ogBatt" , 3000);
         intent.putExtra("currBatt", 50);
@@ -213,7 +220,7 @@ public class PlayAnimationActivity extends AppCompatActivity {
      */
     public void returnToTitle(View view) {
         Log.v("BackButton" , "Returning to title");
-        Toast.makeText(PlayAnimationActivity.this, "BackButton Pushed", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(PlayAnimationActivity.this, "BackButton Pushed", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this , AMazeActivity.class);
         startActivity(intent);
     }
@@ -222,11 +229,15 @@ public class PlayAnimationActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(Context...params) {
-            for(int i = 0; i < 10; i++) {
-                //pBar.incrementProgressBy(percent);
-                publishProgress();
-                timeDelay(1000);
+            //pBar.incrementProgressBy(percent);
+            try {
+                dri.drive2Exit();
+            } catch(Exception e){
+                Log.v("Exception", "Exception on drive2Exit " + e.getMessage());
+                e.printStackTrace();
+                Log.v("Cause", ""+e.getCause());
             }
+            finish();
             return null;
         }
 

@@ -94,6 +94,9 @@ public class PlayManuallyActivity extends AppCompatActivity {
         state = new StatePlaying();
         state.setMazeConfiguration(config);
         state.pMA = this;
+        state.manual = true;
+        panel.manual = true;
+
         state.start(panel);
 
         //cont = VariableStorage.controller;
@@ -210,6 +213,11 @@ public class PlayManuallyActivity extends AppCompatActivity {
             paused = true;
             pMsg.setVisibility(View.VISIBLE);
         }
+    }
+
+
+    public void finish(){
+        winNow();
     }
 
     /**

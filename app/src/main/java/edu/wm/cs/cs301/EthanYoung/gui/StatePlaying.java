@@ -55,6 +55,7 @@ public class StatePlaying extends DefaultState {
     //private boolean deepdebug = false;
     //private boolean allVisible = false;
     //private boolean newGame = false;
+    boolean manual;
 
     
     boolean started;
@@ -160,7 +161,12 @@ public class StatePlaying extends DefaultState {
             // check termination, did we leave the maze?
             if (isOutside(px,py)) {
                 //control.switchFromPlayingToWinning(0);
-                pMA.winNow();
+                if(manual) {
+                    pMA.finish();
+                }
+                else{
+                    pAA.finish();
+                }
             }
             break;
         case Left: // turn left
@@ -174,7 +180,12 @@ public class StatePlaying extends DefaultState {
             // check termination, did we leave the maze?
             if (isOutside(px,py)) {
                 //control.switchFromPlayingToWinning(0);
-                pMA.winNow();
+                if(manual) {
+                    pMA.finish();
+                }
+                else{
+                    pAA.finish();
+                }
             }
             break;
         case ReturnToTitle: // escape to title screen

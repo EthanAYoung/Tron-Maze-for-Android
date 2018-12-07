@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
 import android.media.Image;
+import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -47,6 +48,8 @@ public class MazePanel extends View {
     Canvas can;
     Paint paint;
     Paint tempPaint;
+    public Boolean manual;
+    Handler hand;
 
     /**
      * Constructor. Object is not focusable.
@@ -168,6 +171,9 @@ public class MazePanel extends View {
     public void update() {
         //paint(g);
         invalidate();
+        if(!manual){
+            timeDelay(100);
+        }
     }
 
     /**
@@ -402,6 +408,16 @@ public class MazePanel extends View {
         path.moveTo(xps[0], yps[0]);
 
         can.drawPath(path,paint);
+    }
+
+    /**
+     * A helper method to pause the program
+     * useful to see what decisions the driver is making
+     */
+    public void timeDelay(long t) {
+        try {
+            Thread.sleep(t);
+        } catch (InterruptedException e) {}
     }
 
 }
