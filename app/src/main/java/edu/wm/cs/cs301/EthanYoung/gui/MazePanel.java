@@ -172,7 +172,7 @@ public class MazePanel extends View {
         //paint(g);
         invalidate();
         if(!manual){
-            timeDelay(100);
+            timeDelay(1000);
         }
     }
 

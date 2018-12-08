@@ -71,6 +71,8 @@ public class PlayManuallyActivity extends AppCompatActivity {
 
         mediaPlayer.start();
 
+        vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+
         pB = (Button) findViewById(R.id.pauseButt);
         mB = (Button) findViewById(R.id.mapButt);
         sB = (Button) findViewById(R.id.solButt);

@@ -8,6 +8,27 @@
     tools:context=".GeneratingActivity"
     tools:showIn="@layout/activity_generating">
 
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="396dp"
+        android:layout_height="252dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginBottom="178dp"
+        android:src="@android:color/background_dark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="173dp" />
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gifImageView"
+        android:layout_width="372dp"
+        android:layout_height="577dp"
+        android:layout_marginStart="19dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/loading"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <Button
         android:id="@+id/backButt5"
         android:layout_width="wrap_content"
@@ -27,11 +48,13 @@
         android:layout_width="173dp"
         android:layout_height="148dp"
         android:layout_marginStart="119dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="119dp"
-        android:layout_marginBottom="228dp"
         android:indeterminate="false"
         android:progress="0"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/backButt5" />
+
 </android.support.constraint.ConstraintLayout>
