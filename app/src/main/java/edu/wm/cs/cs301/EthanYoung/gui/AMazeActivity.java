@@ -35,7 +35,7 @@ public class AMazeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_amaze);
 
-        mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.sans);
+        mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.menu);
 
         mediaPlayer.start();
 
@@ -98,6 +98,9 @@ public class AMazeActivity extends AppCompatActivity {
         intent.putExtra("algorithm", algSelect.getSelectedItem().toString());
         intent.putExtra("load", load);
         intent.putExtra("level" , levSelect.getProgress() );
+
+        VariableStorage.mediaPlayer = mediaPlayer;
+        //mediaPlayer.stop();
 
         startActivity(intent);
     }

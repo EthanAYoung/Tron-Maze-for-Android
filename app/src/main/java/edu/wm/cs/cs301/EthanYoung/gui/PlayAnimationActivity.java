@@ -15,6 +15,7 @@ package edu.wm.cs.cs301.EthanYoung.gui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -54,11 +55,16 @@ public class PlayAnimationActivity extends AppCompatActivity {
     RobotDriver dri;
     Boolean done;
     int batt;
+    MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_animation);
+
+        mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.playing);
+
+        mediaPlayer.start();
 
         pB = (Button) findViewById(R.id.pauseButt);
         mB = (Button) findViewById(R.id.mapButt);
@@ -183,6 +189,7 @@ public class PlayAnimationActivity extends AppCompatActivity {
     }
 
     public void finish(){
+        mediaPlayer.stop();
         if(rob.hasStopped()){
             loseNow();
         }
@@ -230,6 +237,7 @@ public class PlayAnimationActivity extends AppCompatActivity {
      * Returns to AMazeActivity
      */
     public void returnToTitle(View view) {
+        mediaPlayer.stop();
         Log.v("BackButton" , "Returning to title");
         //Toast.makeText(PlayAnimationActivity.this, "BackButton Pushed", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this , AMazeActivity.class);

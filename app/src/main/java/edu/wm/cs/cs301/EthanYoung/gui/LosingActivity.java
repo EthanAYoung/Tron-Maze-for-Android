@@ -11,6 +11,7 @@
 package edu.wm.cs.cs301.EthanYoung.gui;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -27,11 +28,16 @@ public class LosingActivity extends AppCompatActivity {
     TextView shortPathLText;
     TextView battConsText;
     TextView reasonText;
+    MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_losing);
+
+        mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.losing);
+
+        mediaPlayer.start();
 
         pathLText = (TextView) findViewById(R.id.pathLenText);
         shortPathLText = (TextView) findViewById(R.id.shortPathLenText);
@@ -76,6 +82,7 @@ public class LosingActivity extends AppCompatActivity {
      * Returns to AMazeActivity
      */
     public void returnToTitle(View view) {
+        mediaPlayer.stop();
         Log.v("BackButton" , "Returning to title");
         Toast.makeText(LosingActivity.this, "BackButton Pushed", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this , AMazeActivity.class);

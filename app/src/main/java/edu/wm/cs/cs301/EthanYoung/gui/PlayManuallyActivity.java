@@ -16,6 +16,7 @@
 package edu.wm.cs.cs301.EthanYoung.gui;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -58,6 +59,7 @@ public class PlayManuallyActivity extends AppCompatActivity {
     MazePanel panel;
     int shortestPathL;
     int pathL;
+    MediaPlayer mediaPlayer;
 
 
     @Override
@@ -65,6 +67,10 @@ public class PlayManuallyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Log.v("manual play check", "manual play check");
         setContentView(R.layout.activity_play_manually);
+
+        mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.playing);
+
+        mediaPlayer.start();
 
         pB = (Button) findViewById(R.id.pauseButt);
         mB = (Button) findViewById(R.id.mapButt);
@@ -217,6 +223,7 @@ public class PlayManuallyActivity extends AppCompatActivity {
 
 
     public void finish(){
+        mediaPlayer.stop();
         winNow();
     }
 
@@ -259,6 +266,7 @@ public class PlayManuallyActivity extends AppCompatActivity {
      * Returns to AMazeActivity
      */
     public void returnToTitle(View view) {
+        mediaPlayer.stop();
         Log.v("BackButton" , "Returning to title");
         Toast.makeText(PlayManuallyActivity.this, "BackButton Pushed", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this , AMazeActivity.class);

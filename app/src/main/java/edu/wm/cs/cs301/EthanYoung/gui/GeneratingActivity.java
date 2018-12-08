@@ -10,6 +10,7 @@ package edu.wm.cs.cs301.EthanYoung.gui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -51,12 +52,16 @@ public class GeneratingActivity extends AppCompatActivity {
     MazeBuilder mBuild;
     Context con;
     int progress;
+    MediaPlayer mediaPlayer;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_generating);
+
+        mediaPlayer = VariableStorage.mediaPlayer;
+
         pBar = (ProgressBar) findViewById(R.id.progressBar);
         Intent intent = getIntent();
         algo = intent.getStringExtra("algorithm");
@@ -300,6 +305,7 @@ public class GeneratingActivity extends AppCompatActivity {
      * Transitions to PlayManuallyActivity or PlayAnimationActivity
      */
     private void moveOn(Boolean manual){
+        mediaPlayer.stop();
         Intent intent;
         if(manual){
             intent = new Intent(this , PlayManuallyActivity.class);
@@ -325,6 +331,7 @@ public class GeneratingActivity extends AppCompatActivity {
      * Returns to AMazeActivity
      */
     public void returnToTitle(View view) {
+        mediaPlayer.stop();
         Log.v("BackButton" , "Returning to title");
         Toast.makeText(GeneratingActivity.this, "BackButton Pushed", Toast.LENGTH_SHORT).show();
         wentBack = true;
