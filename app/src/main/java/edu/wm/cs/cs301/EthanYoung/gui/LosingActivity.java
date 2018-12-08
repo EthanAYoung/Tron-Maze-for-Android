@@ -13,14 +13,10 @@ package edu.wm.cs.cs301.EthanYoung.gui;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class LosingActivity extends AppCompatActivity {
 
@@ -84,7 +80,7 @@ public class LosingActivity extends AppCompatActivity {
     public void returnToTitle(View view) {
         mediaPlayer.stop();
         Log.v("BackButton" , "Returning to title");
-        Toast.makeText(LosingActivity.this, "BackButton Pushed", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(LosingActivity.this, "BackButton Pushed", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this , AMazeActivity.class);
         startActivity(intent);
     }

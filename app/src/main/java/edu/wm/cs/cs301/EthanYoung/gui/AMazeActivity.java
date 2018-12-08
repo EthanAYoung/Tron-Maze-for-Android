@@ -17,7 +17,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.SeekBar;
 import android.widget.Spinner;
-import android.widget.Toast;
+//import android.widget.Toast;
 
 import edu.wm.cs.cs301.EthanYoung.generation.MultipleMazeWriter;
 
@@ -73,7 +73,7 @@ public class AMazeActivity extends AppCompatActivity {
      */
     public void exploreClicked(View view) {
         Log.v("ExploreButton" , "Starting to generate a maze");
-        Toast.makeText(AMazeActivity.this, "Explore Pushed", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(AMazeActivity.this, "Explore Pushed", Toast.LENGTH_SHORT).show();
         load = false;
         generateMaze();
     }
@@ -84,7 +84,7 @@ public class AMazeActivity extends AppCompatActivity {
      */
     public void revisitClicked(View view) {
         Log.v("RevisitButton" , "Loading a maze");
-        Toast.makeText(AMazeActivity.this, "Revisit Pushed", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(AMazeActivity.this, "Revisit Pushed", Toast.LENGTH_SHORT).show();
         load = true;
         generateMaze();
     }

@@ -16,6 +16,7 @@ import edu.wm.cs.cs301.EthanYoung.generation.MazeContainer;
 import edu.wm.cs.cs301.EthanYoung.generation.Seg;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.util.ArrayList;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -113,9 +114,10 @@ public class MazeFileReader {
 
 			String path = "C://Users//Ethan//AndroidStudioProjects//AMazeByEthanYoung//app//src//main//java//edu//wm//cs//cs301//EthanYoung//gui//";
 
-			File fXmlFile = new File(con.getFilesDir() + "/" + filename);
+			//File fXmlFile = new File(con.getFilesDir() + "/" + filename);
 			//File fXmlFile = new File(filename);
 			//File fXmlFile = new File(path + filename);
+			File fXmlFile = con.getFileStreamPath(filename);
 
 			Log.v("file path", fXmlFile.getPath());
 			Log.v("file name", fXmlFile.getName());
@@ -128,9 +130,10 @@ public class MazeFileReader {
 				Log.v("Exists", "it exists!!!!!!");
 			}
 
+			FileInputStream file = con.openFileInput(filename);
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-			Document doc = dBuilder.parse(fXmlFile);
+			Document doc = dBuilder.parse(file);
 			doc.getDocumentElement().normalize();
 
 			NodeList nList = doc.getElementsByTagName("Maze");
