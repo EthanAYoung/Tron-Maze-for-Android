@@ -17,7 +17,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -56,6 +59,7 @@ public class PlayAnimationActivity extends AppCompatActivity {
     Boolean done;
     int batt;
     MediaPlayer mediaPlayer;
+    Vibrator vibrator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -174,6 +178,9 @@ public class PlayAnimationActivity extends AppCompatActivity {
      */
     public void pause(View view) {
         Log.v("PauseButton" , "Toggling Pause");
+        if (Build.VERSION.SDK_INT >= 26) {
+            vibrator.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
+        }
         //Toast.makeText(PlayAnimationActivity.this, "Pause Pushed", Toast.LENGTH_SHORT).show();
         if(paused){
             //dri.pause = false;

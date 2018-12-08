@@ -11,7 +11,10 @@ package edu.wm.cs.cs301.EthanYoung.gui;
 
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -29,6 +32,7 @@ public class AMazeActivity extends AppCompatActivity {
     SeekBar levSelect;
     Boolean load;
     MediaPlayer mediaPlayer;
+    Vibrator vibrator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +69,8 @@ public class AMazeActivity extends AppCompatActivity {
 
         //MultipleMazeWriter mmw = new MultipleMazeWriter(this);
         //mmw.start();
+
+        vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
     }
 
     /**
@@ -73,6 +79,9 @@ public class AMazeActivity extends AppCompatActivity {
      */
     public void exploreClicked(View view) {
         Log.v("ExploreButton" , "Starting to generate a maze");
+        if (Build.VERSION.SDK_INT >= 26) {
+            vibrator.vibrate(VibrationEffect.createOneShot(400, VibrationEffect.DEFAULT_AMPLITUDE));
+        }
         //Toast.makeText(AMazeActivity.this, "Explore Pushed", Toast.LENGTH_SHORT).show();
         load = false;
         generateMaze();

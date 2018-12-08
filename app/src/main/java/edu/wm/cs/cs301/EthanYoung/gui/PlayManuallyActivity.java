@@ -17,7 +17,10 @@ package edu.wm.cs.cs301.EthanYoung.gui;
 
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -55,6 +58,7 @@ public class PlayManuallyActivity extends AppCompatActivity {
     int shortestPathL;
     int pathL;
     MediaPlayer mediaPlayer;
+    Vibrator vibrator;
 
 
     @Override
@@ -203,6 +207,9 @@ public class PlayManuallyActivity extends AppCompatActivity {
      */
     public void pause(View view) {
         Log.v("PauseButton" , "Toggling Pause");
+        if (Build.VERSION.SDK_INT >= 26) {
+            vibrator.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
+        }
         //Toast.makeText(PlayManuallyActivity.this, "Pause Pushed", Toast.LENGTH_SHORT).show();
         if(paused){
             //dri.pause = false;
