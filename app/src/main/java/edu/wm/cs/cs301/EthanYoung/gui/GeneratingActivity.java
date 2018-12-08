@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import java.io.File;
 
+import edu.wm.cs.cs301.EthanYoung.generation.Distance;
 import edu.wm.cs.cs301.EthanYoung.generation.MazeBuilder;
 import edu.wm.cs.cs301.EthanYoung.generation.MazeConfiguration;
 import edu.wm.cs.cs301.EthanYoung.generation.MazeFactory;
@@ -46,10 +47,10 @@ public class GeneratingActivity extends AppCompatActivity {
     File savedFile;
     //MazeFileReader mfr;
     Boolean load;
-    Controller cont;
-    RobotDriver dri;
     Boolean wentBack;
     MazeBuilder mBuild;
+    Context con;
+    int progress;
 
 
     @Override
@@ -61,11 +62,14 @@ public class GeneratingActivity extends AppCompatActivity {
         algo = intent.getStringExtra("algorithm");
         rob = intent.getStringExtra("robot");
         level = intent.getIntExtra("level", 0);
-        load = intent.getBooleanExtra("genMode" , false);
+        load = intent.getBooleanExtra("load" , false);
         //VariableStorage.mostRecentSkill = level;
         //VariableStorage.stepsTaken = 0;
         //VariableStorage.energyConsumed = 0;
         wentBack = false;
+        con = this;
+
+        Log.v("Load", ""+load);
 
 
         new MazeGenerator().execute();
@@ -147,30 +151,70 @@ public class GeneratingActivity extends AppCompatActivity {
 
     public class MazeGenerator extends AsyncTask<Context, Integer, String> {
         @Override
-        protected String doInBackground(Context...params){
-            MazeFactory fac = new MazeFactory(false);
-            Builder builder = Builder.DFS;
-            switch(algo){
-                case "DFS":
-                    builder = Builder.DFS;
-                    break;
-                case "Eller":
-                    builder = Builder.Eller;
-                    break;
-                case "Prim":
-                    builder = Builder.Prim;
-            }
-            OrderHelper ord = new OrderHelper(level, builder, true);
-            fac.order(ord);
-            mBuild = fac.getMazeBuilder();
-            //mBuild.BSPBuild.mGen = this;
-            fac.waitTillDelivered();
-            Log.v("gen done", "gen done");
+        protected String doInBackground(Context...params) {
+            progress = 33;
             publishProgress();
-            MazeConfiguration config = ord.getConfig();
-            VariableStorage.config = config;
-            timeDelay(3000);
+            if(load && level < 4) {
+                String path= "C:\\Users\\Ethan\\AndroidStudioProjects\\AMazeByEthanYoung\\app\\src\\main\\java\\edu\\wm\\cs\\cs301\\EthanYoung\\generation\\";
+                //String path = "C:/Users/Ethan/AndroidStudioProjects/AMazeByEthanYoung/app/src/main/java/edu/wm/cs/cs301/EthanYoung/generation/";
+                MazeFileReader mazeReader = new MazeFileReader(con,"maze" + level + ".xml");
+                /*MazeFactory fac = new MazeFactory(false);
+                Builder builder = Builder.DFS;
+                OrderHelper ord = new OrderHelper(0, builder, true);
+                fac.order(ord);
+                fac.waitTillDelivered();
+                MazeConfiguration config = ord.getConfig();*/
+                MazeConfiguration config;
+                try {
+                    config = mazeReader.getMazeConfiguration();
+                    config.setHeight(mazeReader.getHeight());
+                    config.setWidth(mazeReader.getWidth());
+                    config.setMazecells(mazeReader.getCells());
 
+                    Log.v("Height", mazeReader.getHeight() + "");
+
+                    config.setMazedists(new Distance(mazeReader.getDistances()));
+                    config.setRootnode(mazeReader.getRootNode());
+                    config.setStartingPosition(mazeReader.getStartX(), mazeReader.getStartY());
+                } catch (Exception e){
+                    MazeFactory fac = new MazeFactory(false);
+                    OrderHelper ord = new OrderHelper(level, Builder.DFS, true);
+                    fac.order(ord);
+                    fac.waitTillDelivered();
+                    config = ord.getConfig();
+                }
+                //progress = 66;
+                publishProgress();
+                VariableStorage.config = config;
+
+            }
+            else{
+                MazeFactory fac = new MazeFactory(false);
+                Builder builder = Builder.DFS;
+                switch (algo) {
+                    case "DFS":
+                        builder = Builder.DFS;
+                        break;
+                    case "Eller":
+                        builder = Builder.Eller;
+                        break;
+                    case "Prim":
+                        builder = Builder.Prim;
+                }
+                OrderHelper ord = new OrderHelper(level, builder, true);
+                fac.order(ord);
+                mBuild = fac.getMazeBuilder();
+                //mBuild.BSPBuild.mGen = this;
+                fac.waitTillDelivered();
+                Log.v("gen done", "gen done");
+                //progress = 66;
+                publishProgress();
+                MazeConfiguration config = ord.getConfig();
+                VariableStorage.config = config;
+            }
+            timeDelay(3000);
+            //progress = 100;
+            publishProgress();
             if(wentBack == false) {
                 if (rob.equals("Manual")) {
                     moveOn(true);
@@ -186,7 +230,7 @@ public class GeneratingActivity extends AppCompatActivity {
         @Override
         protected void onProgressUpdate(Integer... values) {
             Log.v("publishing", "publishing");
-            pBar.incrementProgressBy(mBuild.BSPBuild.progress);
+            pBar.incrementProgressBy(progress);
         }
 
         public void update(){

@@ -3,6 +3,9 @@
  */
 package edu.wm.cs.cs301.EthanYoung.gui;
 
+import android.content.Context;
+import android.util.Log;
+
 import edu.wm.cs.cs301.EthanYoung.generation.BSPBranch;
 import edu.wm.cs.cs301.EthanYoung.generation.BSPLeaf;
 import edu.wm.cs.cs301.EthanYoung.generation.BSPNode;
@@ -44,13 +47,15 @@ public class MazeFileReader {
 	private int startx ;
 	private int starty ;
 	private BSPNode root ;
+	private Context con;
 
 	/**
 	 * Constructor reads maze data from given file. The file format is an XML format produced by the MazeFileWriter class.
 	 *  
 	 * @param filename with data of a Maze object
 	 */
-	public MazeFileReader(String filename) {
+	public MazeFileReader(Context c, String filename) {
+		con = c;
 		load(filename) ;
 	}
 
@@ -106,7 +111,23 @@ public class MazeFileReader {
 	{
 		try{
 
-			File fXmlFile = new File(filename);
+			String path = "C://Users//Ethan//AndroidStudioProjects//AMazeByEthanYoung//app//src//main//java//edu//wm//cs//cs301//EthanYoung//gui//";
+
+			File fXmlFile = new File(con.getFilesDir() + "/" + filename);
+			//File fXmlFile = new File(filename);
+			//File fXmlFile = new File(path + filename);
+
+			Log.v("file path", fXmlFile.getPath());
+			Log.v("file name", fXmlFile.getName());
+			Log.v("file path 2", fXmlFile.getAbsolutePath());
+
+			if(!fXmlFile.exists()){
+				Log.v("Null", "file is null");
+			}
+			else{
+				Log.v("Exists", "it exists!!!!!!");
+			}
+
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			Document doc = dBuilder.parse(fXmlFile);

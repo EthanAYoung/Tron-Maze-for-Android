@@ -94,9 +94,10 @@ public class StateGenerating extends DefaultState implements Order {
      */
     private MazeConfiguration loadMazeConfigurationFromFile(String filename) {
         // load maze from file
-        MazeFileReader mfr = new MazeFileReader(filename) ;
+        //MazeFileReader mfr = new MazeFileReader(filename) ;
         // obtain MazeConfiguration
-        return mfr.getMazeConfiguration();
+        //return mfr.getMazeConfiguration();
+        return null;
     }
     /**
      * Start the maze generation.

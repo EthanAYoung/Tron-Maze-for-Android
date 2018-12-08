@@ -18,6 +18,8 @@ public class MazeBuilder implements Runnable {
 	protected int width, height ; 	// width and height of maze, 
 	private int rooms; 		// requested number of rooms in maze, a room is an area with no walls larger than a single cell
 	private int expectedPartiters; 	// user given limit for partiters
+	public int parits;
+	public BSPNode rootNode;
 	
 	// Produced output information to create the new maze
 	// root, cells, dists, startx, starty
@@ -101,10 +103,12 @@ public class MazeBuilder implements Runnable {
 
 			final int colchange = random.nextIntWithinInterval(0, 255); // used in the constructor for Segments  class Seg
 			final BSPBuilder b = new BSPBuilder(order, dists, cells, width, height, colchange, expectedPartiters) ;
+			parits = expectedPartiters;
 			BSPBuild = b;
 			BSPNode root = b.generateBSPNodes(); // takes a long time, updates progressbar,
 			// it also internally checks for cancel requests
 			// and throws an interrupted exception if that happens
+			rootNode = root;
 
 			Thread.sleep(SLEEP_INTERVAL) ; // test if thread has been interrupted, i.e. notified to stop
 

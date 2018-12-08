@@ -4,10 +4,14 @@
 package edu.wm.cs.cs301.EthanYoung.gui;
 
 
+import android.content.Context;
+import android.util.Log;
+
 import edu.wm.cs.cs301.EthanYoung.generation.BSPNode;
 import edu.wm.cs.cs301.EthanYoung.generation.Cells;
 
 import java.io.File;
+import java.io.IOException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -35,7 +39,7 @@ public class MazeFileWriter {
 	/**
 	 * Write maze content to a file
 	 */
-	public static void store(String filename, int width, int height, int rooms, int expected_partiters, BSPNode root, Cells cells, int[][] dists, int startX, int startY)
+	public static void store(Context con, String filename, int width, int height, int rooms, int expected_partiters, BSPNode root, Cells cells, int[][] dists, int startX, int startY)
 	{
 		 try {
 			 	// get a document 
@@ -51,7 +55,30 @@ public class MazeFileWriter {
 				TransformerFactory transformerFactory = TransformerFactory.newInstance();
 				Transformer transformer = transformerFactory.newTransformer();
 				DOMSource source = new DOMSource(doc);
-				StreamResult result = new StreamResult(new File(filename));
+				//StreamResult result = new StreamResult(new File(filename));
+
+                String path = "C:\\Users\\Ethan\\AndroidStudioProjects\\AMazeByEthanYoung\\app\\src\\main\\java\\edu\\wm\\cs\\cs301\\EthanYoung\\gui\\files\\";
+
+
+                //File folder = new File(con.getFilesDir() + "/mazes/");
+				//File folder = new File(con.getFilesDir() + "/");
+				//File file = new File(con.getFilesDir() + "/mazes/" + filename);
+				//File file = new File(con.getFilesDir() + filename);
+			 	File file = new File(filename);
+			 	//File file = new File(path + filename);
+				try {
+					file.createNewFile();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				Log.v("file path", file.getPath());
+				Log.v("file name", file.getName());
+
+				if (!file.mkdirs()){
+				 Log.v("Log", "Directory not created");
+				}
+
+				StreamResult result = new StreamResult(file);
 		 
 				transformer.transform(source, result);
 			  } catch (ParserConfigurationException pce) {

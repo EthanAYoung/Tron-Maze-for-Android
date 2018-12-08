@@ -52,6 +52,8 @@ public class PlayAnimationActivity extends AppCompatActivity {
     String robType;
     BasicRobot rob;
     RobotDriver dri;
+    Boolean done;
+    int batt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +72,7 @@ public class PlayAnimationActivity extends AppCompatActivity {
 
         seeButts = false;
         paused = false;
+        done = false;
 
         config = VariableStorage.config;
 
@@ -107,7 +110,15 @@ public class PlayAnimationActivity extends AppCompatActivity {
 
         state.start(panel);
 
-        new batteryTracker().execute();
+        new driveRobot().execute();
+
+        //for(int i = 0; i < 100; i++){
+            //pBar.incrementProgressBy(-1);
+            //timeDelay(500);
+        //}
+        //new batteryTracker().execute();
+
+
 
     }
 
@@ -189,9 +200,9 @@ public class PlayAnimationActivity extends AppCompatActivity {
         //Toast.makeText(PlayAnimationActivity.this, "Go2Winning Pushed", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this , WinningActivity.class);
         intent.putExtra("ogBatt" , 3000);
-        intent.putExtra("currBatt", 50);
-        intent.putExtra("pathL" , 32);
-        intent.putExtra("shortPathL" , 4);
+        intent.putExtra("currBatt", batt);
+        intent.putExtra("pathL" , rob.pathL);
+        intent.putExtra("shortPathL" , shortestPathL);
         intent.putExtra("manual" , false);
 
         startActivity(intent);
@@ -206,11 +217,11 @@ public class PlayAnimationActivity extends AppCompatActivity {
         //Toast.makeText(PlayAnimationActivity.this, "Go2Loosing Pushed", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this , LosingActivity.class);
         intent.putExtra("ogBatt" , 3000);
-        intent.putExtra("currBatt", 50);
-        intent.putExtra("pathL" , 32);
-        intent.putExtra("shortPathL" , 4);
+        intent.putExtra("currBatt", batt);
+        intent.putExtra("pathL" , rob.pathL);
+        intent.putExtra("shortPathL" , shortestPathL);
         intent.putExtra("manual" , false);
-        intent.putExtra("reason" , "crashed");
+        intent.putExtra("reason" , "Battery Died");
 
         startActivity(intent);
     }
@@ -225,11 +236,10 @@ public class PlayAnimationActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    class batteryTracker extends AsyncTask<Context, Integer, String> {
+    class driveRobot extends AsyncTask<Context, Integer, String> {
 
         @Override
         protected String doInBackground(Context...params) {
-            //pBar.incrementProgressBy(percent);
             try {
                 dri.drive2Exit();
             } catch(Exception e){
@@ -237,12 +247,38 @@ public class PlayAnimationActivity extends AppCompatActivity {
                 e.printStackTrace();
                 Log.v("Cause", ""+e.getCause());
             }
+            batt = (int)rob.batt;
+            publishProgress();
+            done = true;
             finish();
             return null;
         }
 
         @Override
         protected void onProgressUpdate(Integer... values) {
+            int batt = (int)rob.getBatteryLevel();
+            pBar.setProgress(batt/3000 * 100);
+            //pBar.incrementProgressBy(-10);
+        }
+
+    }
+
+    class batteryTracker extends AsyncTask<Context, Integer, String> {
+
+        @Override
+        protected String doInBackground(Context...params) {
+            //pBar.incrementProgressBy(percent);
+            while(done == false){
+                publishProgress();
+                timeDelay(500);
+            }
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            int batt = (int)rob.getBatteryLevel();
+            //pBar.setProgress(batt/3000 * 100);
             pBar.incrementProgressBy(-10);
         }
     }

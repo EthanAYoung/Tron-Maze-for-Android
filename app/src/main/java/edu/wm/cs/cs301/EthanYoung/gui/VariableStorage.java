@@ -6,10 +6,16 @@ import edu.wm.cs.cs301.EthanYoung.generation.MazeConfiguration;
 
 public class VariableStorage {
 
-    static Controller cont;
+    //static Controller cont;
     static Bitmap bMap;
     private static MazePanel panel;
     static MazeConfiguration config;
+
+    static MazeConfiguration config0;
+    static MazeConfiguration config1;
+    static MazeConfiguration config2;
+    static MazeConfiguration config3;
+
 
     public static MazePanel getMazePanel() {
         return panel;
@@ -19,9 +25,9 @@ public class VariableStorage {
         return bMap;
     }
 
-    public void setCont(Controller c){
+    /*public void setCont(Controller c){
         cont = c;
-    }
+    }*/
 
     public void setBMap(Bitmap b) {
         bMap = b;
