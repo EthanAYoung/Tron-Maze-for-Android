@@ -8,6 +8,21 @@
     tools:context=".WinningActivity"
     tools:showIn="@layout/activity_winning">
 
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="467dp"
+        android:layout_height="698dp"
+        android:src="@android:color/background_dark"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <pl.droidsonroids.gif.GifImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/youwin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Button
         android:id="@+id/backButt2"
         android:layout_width="wrap_content"
@@ -19,50 +34,52 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="270dp"
+        android:layout_height="77dp"
+        android:layout_marginEnd="72dp"
+        android:layout_marginBottom="424dp"
+        android:src="@android:color/darker_gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <TextView
         android:id="@+id/youWinText"
         android:layout_width="80dp"
         android:layout_height="41dp"
-        android:layout_marginStart="165dp"
-        android:layout_marginTop="141dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="24dp"
         android:text="YOU WIN"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/pathLenText"
         app:layout_constraintTop_toBottomOf="@+id/backButt2" />
 
     <TextView
         android:id="@+id/pathLenText"
-        android:layout_width="134dp"
-        android:layout_height="51dp"
-        android:layout_marginStart="138dp"
-        android:layout_marginEnd="139dp"
-        android:layout_marginBottom="27dp"
+        android:layout_width="166dp"
+        android:layout_height="34dp"
+        android:layout_marginEnd="68dp"
         android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/shortPathLenText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/engConsText"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/shortPathLenText"
-        android:layout_width="132dp"
+        android:layout_width="208dp"
         android:layout_height="51dp"
-        android:layout_marginStart="140dp"
-        android:layout_marginEnd="139dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="416dp"
         android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/engConsText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/engConsText" />
 
     <TextView
         android:id="@+id/engConsText"
-        android:layout_width="130dp"
+        android:layout_width="108dp"
         android:layout_height="51dp"
-        android:layout_marginStart="142dp"
-        android:layout_marginEnd="139dp"
-        android:layout_marginBottom="116dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="416dp"
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
